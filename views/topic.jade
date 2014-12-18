@@ -12,12 +12,13 @@ block content
  |Close Time : #{closed_time} 
  p
   |Description : #{description}
- div Comments
-  ul
+ div Comments 
+  button(id="btn_loadComplete") Load Complete
+  ul(id="allComments")
    each comment in comments
     li
      div
-      | #{comment.name}
+      | #{comment.name}:
       | #{comment.content}
       br
       |#{comment.time}

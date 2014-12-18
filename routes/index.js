@@ -12,7 +12,13 @@ router.use(function(req,res,next){
 })
 router.get('/topic/:id', function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
+		
   		res.render('topic',topic);
+	});
+});
+router.get('/getComments/:id', function(req, res) {
+	topic_module.get_comments(req.params.id,function(err,comments){
+  		res.json(comments);
 	});
 });
 router.post('/newComment/:id', function(req, res) {
@@ -23,8 +29,7 @@ router.post('/newComment/:id', function(req, res) {
 	}
 	console.log(".......");
 	topic_module.add_new_comment(newComment,function(err){
-		console.log('redirect');
-		res.redirect("/topic/"+newComment.topic_id);
+	  res.end();
 	});
 });
 
@@ -47,5 +52,17 @@ router.post('/topics',function(req, res){
 		res.redirect('topic/'+id)
 	})
 })
+router.get('/register', function(req, res) {
+  res.render('register');
+});
+
+router.post('/register', function(req, res) {
+  var result = userStore.save({
+  	Name:req.body.name,
+  	email:req.body.email,
+  	password:req.body.password
+  });
+  result.error ? res.render('register',result) : res.redirect('/dashboard');  
+});
 
 module.exports = router;

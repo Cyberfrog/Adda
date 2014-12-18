@@ -1,4 +1,4 @@
-node_modules
 data/adda.db
-tests/data/adda.db
 tests/data/adda.db.backup
+tests/data/adda.db
+node_modules
