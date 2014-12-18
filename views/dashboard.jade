@@ -1,0 +1,13 @@
+extends base
+block vars
+ -var title = "dashbord"
+block scripts
+block content
+ p Name: #{name}
+ h3 My Topics:
+ div
+  ol
+   each topic in topics
+    li
+     a(href="/topic/#{topic.id}") #{topic.name} 
+

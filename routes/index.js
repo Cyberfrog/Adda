@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var topic_module = require('../own_modules/topic_module.js').init('./data/adda.db');
 var new_topic_module = require('../own_modules/new_topic_module.js').init('./data/adda.db');
+var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
+
 
 router.get('/', function(req, res) {
   res.render('index', { title: 'Adda' });
@@ -55,6 +57,60 @@ router.post('/register', function(req, res) {
   	password:req.body.password
   });
   result.error ? res.render('register',result) : res.redirect('/dashboard');  
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/dashboard', function(req, res) {
+  user_module.get_user_summary(req.session.user,function(err,user){
+  		res.render('dashboard',user);
+  })
 });
 
 module.exports = router;
