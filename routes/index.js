@@ -29,6 +29,14 @@ router.post('/newComment/:id', function(req, res) {
 });
 
 router.get('/topics',function(req, res){
+	var topic_name =req.query.searchby;
+	if(topic_name){
+		new_topic_module.search_topic_by_name(topic_name,function(err,topics){
+			console.log("----",topics)
+			res.render('topics',{topics:topics})
+		})
+		return;
+	}
 	res.render('topics');
 })
 

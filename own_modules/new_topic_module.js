@@ -19,7 +19,8 @@ var init = function(location){
 	};
 
 	var records  = {
-		add_new_topic : operate(_add_new_topic)
+		add_new_topic : operate(_add_new_topic),
+		search_topic_by_name : operate(_search_topic_by_name)
 	};
 	return records;
 };
@@ -45,7 +46,7 @@ var _add_new_topic = function(new_topic,db,onComplete){
 
 			db.get(select_startid_query,function(err,user){
 				var new_user_start_ids = [];
-				if(user.start_topic_ids == "")
+				if(!user.start_topic_ids)
 					new_user_start_ids.push(topic['max(id)']);
 
 				else{
@@ -64,6 +65,18 @@ var _add_new_topic = function(new_topic,db,onComplete){
 			})
 		})
 	})
+};
+
+var get_search_topics_by_name_query = function(topic_name){
+	return squel.select().field('id').field('name').from('topics')
+		.where("name = '"+topic_name+"' OR description= '"+topic_name+"'")
+};
+
+var _search_topic_by_name = function(topic_name,db,onComplete){
+	var query = get_search_topics_by_name_query(topic_name).toString();
+	db.all(query,function(err,topics){
+		onComplete(null,topics);
+	});
 };
 
 exports.init =init;
