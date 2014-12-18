@@ -39,12 +39,13 @@ var get_topics_for_user =function(user,db,onComplete){
 	var all_topic_ids = user.join_topic_ids.concat(user.start_topic_ids);
 	var lastId = _.last(all_topic_ids);
 	user.topics = [];
+	if(all_topic_ids.length==0){onComplete(null,user); return;}
 	 var topic_query ="select id,name from topics where id=$topic_id";
 
 	 all_topic_ids.forEach(function(id){
 	 	db.get(topic_query,{"$topic_id":id},function(err,topic){
 	 		user.topics.push(topic);
-	 		(id==lastId) && onComplete(err,user);
+		 	(id==lastId) && onComplete(err,user);
 	 	})
 	 })
 }
