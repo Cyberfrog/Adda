@@ -6,21 +6,27 @@ var new_topic_module = require('../own_modules/new_topic_module.js').init('./dat
 router.get('/', function(req, res) {
   res.render('index', { title: 'Adda' });
 });
-router.use(function(req,res,next){
-	req.session={user:"ankur@ex.com"};
-	next();
-})
+
+
+
+var requireLogin = function(req,res,next){
+	req.user? next(): res.redirect('/login');
+};
+
+
 router.get('/topic/:id', function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
 		
   		res.render('topic',topic);
-	});
-});
+	})
+})
+
 router.get('/getComments/:id', function(req, res) {
 	topic_module.get_comments(req.params.id,function(err,comments){
   		res.json(comments);
-	});
-});
+	})
+})
+
 router.post('/newComment/:id', function(req, res) {
 	var newComment = {
 		content:req.body.content,
@@ -30,8 +36,8 @@ router.post('/newComment/:id', function(req, res) {
 	console.log(".......");
 	topic_module.add_new_comment(newComment,function(err){
 	  res.end();
-	});
-});
+	})
+})
 
 router.get('/topics',function(req, res){
 	var topic_name =req.query.searchby;
@@ -61,27 +67,29 @@ router.post('/register', function(req, res) {
   	email:req.body.email,
   	password:req.body.password
   });
-  result.error ? res.render('register',result) : res.redirect('/dashboard');  
+  
+  var redirect = function(){
+  	req.session.user = user.email;
+  	res.redirect('/dashboard');
+  }
+  result.error ? res.render('register',result) : redirect();
+
 });
 
 router.get("/login",function(req,res){
 	res.render("login");
 })
 
-var verify_user = function(user){
-	};
-
 router.post("/login",function(req,res){
 	var user = req.body;
 	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
 		if(user.password == existing_user.password){
-			console.log("$$")
-			res.send("_____")
-
+			req.session.user = user.email;
+  			res.redirect('/dashboard');
 		}
-			
+		else
+		res.redirect('/login');	
 	})
-	
 })
 
 module.exports = router;
