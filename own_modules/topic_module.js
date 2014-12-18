@@ -19,7 +19,9 @@ var init = function(location){
 	};
 
 	var records  = {
-		get_topic_summary:operate(_get_topic_summary)		
+		get_topic_summary:operate(_get_topic_summary),
+		add_new_comment:operate(_add_new_comment)
+
 	};
 	return records;
 };
@@ -38,4 +40,15 @@ var _get_topic_summary = function(id,db,onComplete){
 
 	});
 };
+var _add_new_comment = function(new_comment,db,onComplete){
+	var comment_query ="insert into comments(content,topic_id,time,email) values($content ,$topic_id, $time, $email)";
+	var comment_query_params = {"$content":new_comment.content,
+								"$topic_id":new_comment.topic_id,
+								"$time":new Date().getTime(),
+								"$email":new_comment.email};
+	db.run(comment_query,comment_query_params,function(err){
+		onComplete();
+	})							
+};
+
 exports.init =init;
