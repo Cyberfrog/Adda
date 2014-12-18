@@ -12,7 +12,13 @@ router.use(function(req,res,next){
 })
 router.get('/topic/:id', function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
+		
   		res.render('topic',topic);
+	});
+});
+router.get('/getComments/:id', function(req, res) {
+	topic_module.get_comments(req.params.id,function(err,comments){
+  		res.json(comments);
 	});
 });
 router.post('/newComment/:id', function(req, res) {
@@ -23,8 +29,7 @@ router.post('/newComment/:id', function(req, res) {
 	}
 	console.log(".......");
 	topic_module.add_new_comment(newComment,function(err){
-		console.log('redirect');
-		res.redirect("/topic/"+newComment.topic_id);
+	  res.end();
 	});
 });
 
@@ -34,13 +39,10 @@ router.get('/topics',function(req, res){
 
 router.post('/topics',function(req, res){
 	var new_topic = req.body;
-	// new_topic.email = req.session.user
-	new_topic.email = "ankur@ex.com"
-	console.log("~~~",new_topic);
-	res.end("done")
-	// new_topic_module.add_new_topic(new_topic,function(err){
-	// 	res.redirect('topics')
-	// })
+	new_topic.email = req.session.user;
+	new_topic_module.add_new_topic(new_topic,function(err,id){
+		res.redirect('topic/'+id)
+	})
 })
 
 
