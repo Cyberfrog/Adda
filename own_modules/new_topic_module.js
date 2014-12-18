@@ -64,20 +64,19 @@ var _add_new_topic = function(new_topic,db,onComplete){
 	var select_topicid_query = (squel.select().field('max(id)').from('topics')).toString();
 
 	db.run(insert_topic_query,function(err){
-		
+
 		db.get(select_topicid_query,function(ert,topic){
 			var select_startid_query = (squel.select().field('start_topic_ids').from('users')
 				.where('email=?',new_topic.email)).toString();
 
 			db.get(select_startid_query,function(err,user){
-				var new_user_start_ids;
-				if(user.start_topic_ids == null)
-					new_user_start_ids = [topic['max(id)']];
+				var new_user_start_ids = [];
+				if(user.start_topic_ids == '')
+					new_user_start_ids.push(topic['max(id)']);
 				else
 					new_user_start_ids = JSON.parse(user.start_topic_ids).push(topic['max(id)']);
 
-				var update_users_query = (squel.update()
-			        .table("users")
+				var update_users_query = (squel.update().table("users")
 			        .set("start_topic_ids",JSON.stringify(new_user_start_ids))
 			        .where("email= ?",new_topic.email)
 			    ).toString();
