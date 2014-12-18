@@ -24,7 +24,6 @@ describe('new_topic_module',function(){
 			new_topic_module.add_new_topic(new_topic,function(err){
 				assert.notOk(err);
 				topic_module.get_topic_summary(2,function(err,topic){
-					console.log("~~~`",topic)
 					assert.equal(topic.name,'step');
 					assert.equal(topic.description,'software technology excellence programme');
 					assert.equal(topic.start_time,000001);

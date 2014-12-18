@@ -15,10 +15,8 @@ describe('res_module',function(){
 		describe("registration",function(){
 		it("registration of new user",function(done){
 			var new_user = {name : 'Kaddoo',email : 'kaddoo@lauki.com',password : 'kaddoo123'};
-			console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>>>>>>>>",new_user);
 			res_module.get_new_user(new_user,function(err){
 				assert.notOk(err);
-				console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",new_user)
 				assert.equal(new_user.email,'kaddoo@lauki.com')
 				assert.equal(new_user.name,'Kaddoo');
 				assert.equal(new_user.password,'kaddoo123');
