@@ -34,6 +34,7 @@ var _get_topic_summary = function(id,db,onComplete){
 						id+" and u.email = c.email";
 	db.get(topic_query,function(err,topic){
 		db.all(comment_query,function(err,comments){
+			topic.id =id;
 			topic.comments = comments;
 			onComplete(null,topic);
 		})
@@ -47,7 +48,7 @@ var _add_new_comment = function(new_comment,db,onComplete){
 								"$time":new Date().getTime(),
 								"$email":new_comment.email};
 	db.run(comment_query,comment_query_params,function(err){
-		onComplete();
+		onComplete(err);
 	})							
 };
 

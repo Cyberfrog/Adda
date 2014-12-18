@@ -16,6 +16,8 @@ describe('adda_records',function(){
 		it("get information about topic 1",function(done){
 			adda_records.get_topic_summary(1,function(err,topic){
 				assert.equal(topic.name,'cricket');
+				assert.equal(topic.id,1);
+
 				assert.equal(topic.description,'sachin tendulkar');
 				assert.equal(topic.start_time,123454);
 				assert.equal(topic.close_time,undefined);
