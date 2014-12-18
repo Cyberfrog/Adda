@@ -1,0 +1,20 @@
+extends base
+block vars
+ -var title = "TOPIC"
+
+block content 
+ |Name : #{name}
+ |Started by : #{admin}
+ |Start Time : #{start_time}
+ |Close Time : #{closed_time} 
+ p
+  |Description : #{description}
+ div Comments
+  ul
+   each comment in comments
+    li
+     div
+      | #{comment.name}
+      | #{comment.content}
+      br
+      |#{comment.time}
