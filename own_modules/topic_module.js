@@ -1,5 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
+var lib = require("../own_modules/adda_module.js").lib;
 
 var init = function(location){
 	var operate = function(operation){
@@ -20,7 +21,8 @@ var init = function(location){
 
 	var records  = {
 		get_topic_summary:operate(_get_topic_summary),
-		add_new_comment:operate(_add_new_comment)
+		add_new_comment:operate(_add_new_comment),
+		get_comments:operate(_get_comments)
 
 	};
 	return records;
@@ -30,17 +32,22 @@ var init = function(location){
 var _get_topic_summary = function(id,db,onComplete){
 	var topic_query = " select t.id , t.name, t.description , t.start_time , t.closed_time , u.name as admin "+
 						"from topics t , users u where t.id ="+ id + " and u.email = t.email ";
-	var comment_query = "select c.time, c.content,u.name from comments c,users u where c.topic_id="+
-						id+" and u.email = c.email";
+	
 	db.get(topic_query,function(err,topic){
-		db.all(comment_query,function(err,comments){
-			topic.id =id;
-			topic.comments = comments;
-			onComplete(null,topic);
+		_get_comments(id,db,function(err,comments){
+			topic.id=id;
+			topic.comments = lib.get_last5_comments(comments);
+			onComplete(err,topic);
 		})
-
 	});
 };
+var _get_comments =function(id, db, onComplete){
+	var comment_query = "select c.time, c.content,u.name from comments c,users u where c.topic_id="+
+						id+" and u.email = c.email";
+	db.all(comment_query,function(err,comments){
+		onComplete(err,comments);
+	});
+}
 var _add_new_comment = function(new_comment,db,onComplete){
 	var comment_query ="insert into comments(content,topic_id,time,email) values($content ,$topic_id, $time, $email)";
 	var comment_query_params = {"$content":new_comment.content,

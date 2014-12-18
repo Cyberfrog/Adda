@@ -42,4 +42,12 @@ describe('adda_records',function(){
 			});
 		});
 	});
+	describe("get_comments",function(){
+		it("get all comments of topic 1",function(done){
+			adda_records.get_comments(1,function(err,comments){
+				assert.lengthOf(comments,2); 
+				done();					
+			});
+		});
+	});
 });
