@@ -7,7 +7,8 @@ block content
  h3 My Topics:
  div
   ol
-   each topic in topics
-    li
-     a(href="/topic/#{topic.id}") #{topic.name} 
+   if topics
+    each topic in topics
+     li
+      a(href="/topic/#{topic.id}") #{topic.name} 
 
