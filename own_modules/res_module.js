@@ -9,7 +9,7 @@ var insert_new_user = function(new_user){
         .set("email", new_user.email)
         .set("join_topic_ids", '')
         .set("start_topic_ids", '')
-	);
+	).toString();
 };
 
 var insert_new_password =function(new_user){
@@ -18,12 +18,12 @@ var insert_new_password =function(new_user){
         .into("login")
         .set("email", new_user.email)
         .set("password", new_user.password)
-	);
+	).toString();
 };
 
-var _get_new_user=function(new_user,db,onComplete){
-	var insert_user_query=insert_new_user(new_user).toString();
-	var insert_pwd_query=insert_new_password(new_user).toString();
+var _insert_new_user=function(new_user,db,onComplete){
+	var insert_user_query=insert_new_user(new_user);
+	var insert_pwd_query=insert_new_password(new_user);
 	db.run(insert_user_query,function(err){
 		db.run(insert_pwd_query,function(err){
 			onComplete(null);
@@ -49,7 +49,7 @@ var init = function(location){
 	};
 
 	var records  = {
-		get_new_user:operate(_get_new_user)
+		insert_new_user:operate(_insert_new_user)
 	};
 	return records;
 };

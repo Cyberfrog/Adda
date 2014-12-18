@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var topic_module = require('../own_modules/topic_module.js').init('./data/adda.db');
 var new_topic_module = require('../own_modules/new_topic_module.js').init('./data/adda.db');
+var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 
 router.get('/', function(req, res) {
   res.render('index', { title: 'Adda' });
@@ -44,17 +45,22 @@ router.post('/topics',function(req, res){
 		res.redirect('topic/'+id)
 	})
 })
+
 router.get('/register', function(req, res) {
   res.render('register');
 });
 
 router.post('/register', function(req, res) {
-  var result = userStore.save({
-  	Name:req.body.name,
-  	email:req.body.email,
-  	password:req.body.password
+  var result = req.body;
+  console.log("-----------------------------<>>>>>>",result);
+  res_module.insert_new_user(result,function(err){
+  	req.session.user = result.email;
+  	res.redirect('/dashboard');
   });
-  result.error ? res.render('register',result) : res.redirect('/dashboard');  
 });
+
+router.get('/dashboard',function(req, res){
+	res.render('dashboard');
+})
 
 module.exports = router;
