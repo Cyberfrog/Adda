@@ -82,7 +82,7 @@ var _add_new_topic = function(new_topic,db,onComplete){
 			    ).toString();
 
 				db.run(update_users_query,function(er){
-					onComplete(er);
+					onComplete(er,topic['max(id)']);
 				})
 			})
 		})
