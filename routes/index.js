@@ -39,13 +39,10 @@ router.get('/topics',function(req, res){
 
 router.post('/topics',function(req, res){
 	var new_topic = req.body;
-	// new_topic.email = req.session.user
-	new_topic.email = "ankur@ex.com"
-	console.log("~~~",new_topic);
-	res.end("done")
-	// new_topic_module.add_new_topic(new_topic,function(err){
-	// 	res.redirect('topics')
-	// })
+	new_topic.email = req.session.user;
+	new_topic_module.add_new_topic(new_topic,function(err,id){
+		res.redirect('topic/'+id)
+	})
 })
 
 module.exports = router;
