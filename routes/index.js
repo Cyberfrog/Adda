@@ -43,4 +43,66 @@ router.post('/topics',function(req, res){
 	// })
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/register', function(req, res) {
+  res.render('register');
+});
+
+router.post('/register', function(req, res) {
+  var result = userStore.save({
+  	Name:req.body.name,
+  	email:req.body.email,
+  	password:req.body.password
+  });
+  result.error ? res.render('register',result) : res.redirect('/dashboard');  
+});
+
 module.exports = router;
