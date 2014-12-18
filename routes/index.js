@@ -67,7 +67,7 @@ router.post('/register', function(req, res) {
   	email:req.body.email,
   	password:req.body.password
   });
-  
+
   var redirect = function(){
   	req.session.user = user.email;
   	res.redirect('/dashboard');
