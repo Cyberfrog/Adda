@@ -1,6 +1,9 @@
 extends base
 block vars
  -var title = "TOPIC"
+block scripts
+ script(type ="text/javascript" src ="/javascripts/jquery-1.11.1.min.js")
+ script(type ="text/javascript" src ="/javascripts/new_comment.js")
 
 block content 
  |Name : #{name}
@@ -18,3 +21,6 @@ block content
       | #{comment.content}
       br
       |#{comment.time}
+ div 
+  input(type="text" name="comment",id="cmt_box")
+  button(id="btn_comment") Comment
