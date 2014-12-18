@@ -42,6 +42,16 @@ describe('#new_topic_module',function(){
 		it('#gives all topics starting with name sachin',function(done){
 			new_topic_module.search_topic_by_name('sachin',function(err,topics){
 				assert.lengthOf(topics,1);
+				assert.deepEqual(topics[0],{id:2,name:"sachin"});
+				done();
+			})
+		})
+	})
+	describe('#get_password_by_email',function(){
+		it('#gives password of email_id ankur@ex.com',function(done){
+			new_topic_module.get_password_by_email('ankur@ex.com',function(err,user){
+				assert.notOk(err);
+				assert.equal(user.password,'ankur12345');
 				done();
 			})
 		})
