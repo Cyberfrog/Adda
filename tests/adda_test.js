@@ -16,7 +16,7 @@ describe('adda_records',function(){
 			adda_records.get_topic_summary(1,function(err,topic){
 				// topic.name,topic.description,topic.start_time,
 				// topic.close_time,topic.admin,topic.comments[{}]
-				assert.equal(topic.name,'criket');
+				assert.equal(topic.name,'cricket');
 				assert.equal(topic.description,'sachin tendulkar');
 				assert.equal(topic.start_time,123454);
 				assert.equal(topic.close_time,undefined);
