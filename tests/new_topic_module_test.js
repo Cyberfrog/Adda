@@ -31,11 +31,10 @@ describe('new_topic_module',function(){
 					assert.equal(topic.close_time,undefined);
 					assert.equal(topic.admin,'ankur');
 					assert.lengthOf(topic.comments,0);
-					done();	
+					setTimeout(done,1);
 				})
 
 				//check in users table whether topic start updated or not
-
 			})
 		})
 	})

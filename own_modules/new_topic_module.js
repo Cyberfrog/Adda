@@ -24,10 +24,35 @@ var init = function(location){
 	return records;
 };
 
+var get_update_users_query = function(db,new_topic){
+	var topic_id;
+	var new_user_start_ids;
+	var update_users_query;
+	var select_topicid_query = (squel.select().field('max(id)').from('topics')).toString();
+	
+	db.get(select_topicid_query,function(ert,topic){
+		topic_id = topic['max(id)'];
+	})
+
+	var select_startid_query = (squel.select().field('start_topic_ids').from('users').where('email=?',new_topic.email)).toString();
+	
+	db.get(select_startid_query,function(err,user){
+		if(user.start_topic_ids == null)
+			new_user_start_ids = [topic_id];
+		else
+			new_user_start_ids = JSON.parse(user.start_topic_ids).push(topic_id);
+		update_users_query = (squel.update()
+	        .table("users")
+	        .set("start_topic_ids",new_user_start_ids)
+	        .where("email= ?",new_topic.email)
+	    )
+
+	})
+};
+
 var get_insert_topic_query = function(new_topic){
-	return (squel.insert()
-        .into("topics")
-    	    .set("name",new_topic.name)
+	return (squel.insert().into("topics")
+    	.set("name",new_topic.name)
         .set("description",new_topic.description)
         .set("start_time",new_topic.start_time)
         .set("email",new_topic.email)
@@ -36,11 +61,34 @@ var get_insert_topic_query = function(new_topic){
 
 var _add_new_topic = function(new_topic,db,onComplete){
 	var insert_topic_query = get_insert_topic_query(new_topic).toString();
-	// console.log("query--",insert_topic_query);
-	db.run(insert_topic_query,function(err){
-		onComplete(err);
-	})
+	var select_topicid_query = (squel.select().field('max(id)').from('topics')).toString();
 
+	db.run(insert_topic_query,function(err){
+		db.get(select_topicid_query,function(ert,topic){
+			var select_startid_query = (squel.select().field('start_topic_ids').from('users')
+				.where('email=?',new_topic.email)).toString();
+
+			db.get(select_startid_query,function(err,user){
+				var new_user_start_ids;
+				if(user.start_topic_ids == null)
+					new_user_start_ids = [topic['max(id)']];
+				else
+					new_user_start_ids = JSON.parse(user.start_topic_ids).push(topic['max(id)']);
+
+
+				var update_users_query = (squel.update()
+			        .table("users")
+			        .set("start_topic_ids",JSON.stringify(new_user_start_ids))
+			        .where("email= ?",new_topic.email)
+			    ).toString();
+				
+				db.run(update_users_query,function(er){
+					console.log("er",er)
+					onComplete(er);
+				})
+			})
+		})
+	})
 };
 
 exports.init =init;
