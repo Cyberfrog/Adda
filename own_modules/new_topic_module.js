@@ -19,7 +19,9 @@ var init = function(location){
 	};
 
 	var records  = {
-		add_new_topic : operate(_add_new_topic)
+		add_new_topic : operate(_add_new_topic),
+		search_topic_by_name : operate(_search_topic_by_name),
+		get_password_by_email : operate(_get_password_by_email)
 	};
 	return records;
 };
@@ -63,6 +65,26 @@ var _add_new_topic = function(new_topic,db,onComplete){
 				})
 			})
 		})
+	})
+};
+
+var get_search_topics_by_name_query = function(topic_name){
+	return squel.select().field('id').field('name').from('topics')
+		.where("name = '"+topic_name+"' OR description= '"+topic_name+"'")
+};
+
+var _search_topic_by_name = function(topic_name,db,onComplete){
+	var query = get_search_topics_by_name_query(topic_name).toString();
+	db.all(query,function(err,topics){
+		onComplete(null,topics);
+	});
+};
+
+var _get_password_by_email = function(email,db,onComplete){
+	var query = squel.select().field("password").from("login").where("email='"+email+"'").toString();
+	console.log("+++++++++++++++++")
+	db.get(query,function(err,user){
+		onComplete(null,user);
 	})
 };
 

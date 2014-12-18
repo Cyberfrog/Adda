@@ -36,6 +36,13 @@ router.post('/newComment/:id', function(req, res) {
 });
 
 router.get('/topics',function(req, res){
+	var topic_name =req.query.searchby;
+	if(topic_name){
+		new_topic_module.search_topic_by_name(topic_name,function(err,topics){
+			res.render('topics',{topics:topics})
+		})
+		return;
+	}
 	res.render('topics');
 })
 
@@ -59,58 +66,31 @@ router.post('/register', function(req, res) {
   result.error ? res.render('register',result) : res.redirect('/dashboard');  
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.get('/dashboard', function(req, res) {
   user_module.get_user_summary(req.session.user,function(err,user){
   		res.render('dashboard',user);
   })
 });
+
+router.get("/login",function(req,res){
+	res.render("login");
+})
+
+var verify_user = function(user){
+	};
+
+router.post("/login",function(req,res){
+	var user = req.body;
+	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
+		if(user.password == existing_user.password){
+			console.log("$$")
+			res.send("_____")
+
+		}
+			
+	})
+	
+})
+
 
 module.exports = router;
