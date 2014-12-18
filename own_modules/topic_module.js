@@ -26,6 +26,16 @@ var init = function(location){
 
 
 var _get_topic_summary = function(id,db,onComplete){
+	var topic_query = " select t.id , t.name, t.description , t.start_time , t.closed_time , u.name as admin "+
+						"from topics t , users u where t.id ="+ id + " and u.email = t.email ";
+	var comment_query = "select c.time, c.content,u.name from comments c,users u where c.topic_id="+
+						id+" and u.email = c.email";
+	db.get(topic_query,function(err,topic){
+		db.all(comment_query,function(err,comments){
+			topic.comments = comments;
+			onComplete(null,topic);
+		})
 
+	});
 };
 exports.init =init;
