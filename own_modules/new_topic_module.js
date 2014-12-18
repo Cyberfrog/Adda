@@ -45,7 +45,7 @@ var _add_new_topic = function(new_topic,db,onComplete){
 
 			db.get(select_startid_query,function(err,user){
 				var new_user_start_ids = [];
-				if(user.start_topic_ids == "")
+				if(!user.start_topic_ids)
 					new_user_start_ids.push(topic['max(id)']);
 
 				else{
