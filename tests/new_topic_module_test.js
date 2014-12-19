@@ -18,15 +18,13 @@ describe('#new_topic_module',function(){
 			var new_topic = {
 				name : 'step',
 				description : 'software technology excellence programme',
-				email : 'ankur@ex.com',
-				start_time : 000001
+				email : 'ankur@ex.com'
 			}
 			new_topic_module.add_new_topic(new_topic,function(err,topic_id){
 				assert.notOk(err);
 				topic_module.get_topic_summary(topic_id,function(err,topic){
 					assert.equal(topic.name,'step');
 					assert.equal(topic.description,'software technology excellence programme');
-					assert.equal(topic.start_time,000001);
 					assert.equal(topic.close_time,undefined);
 					assert.equal(topic.admin,'ankur');
 					assert.lengthOf(topic.comments,0);

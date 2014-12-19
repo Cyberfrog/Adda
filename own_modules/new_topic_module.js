@@ -47,7 +47,7 @@ var get_update_users_query = function(new_topic,new_user_start_ids){
 			.where("email= ?",new_topic.email)).toString();
 };
 
-var get_update_topic = function(update_users_query,max_id){
+var get_update_topic = function(db,update_users_query,max_id,onComplete){
 	db.run(update_users_query,function(er){
 		onComplete(er,max_id);
 	})
@@ -56,7 +56,10 @@ var get_update_topic = function(update_users_query,max_id){
 var get_user_from_startid = function(user,new_user_start_ids,max_id){
 	if(!user.start_topic_ids){ 
 		new_user_start_ids.push(max_id);
+	console.log("0000000000000000",new_user_start_ids);
+
 		return new_user_start_ids;
+
 	}
 	new_user_start_ids = JSON.parse(user.start_topic_ids);
 	new_user_start_ids.push(max_id);
@@ -67,29 +70,30 @@ var get_select_for_maxid = function(){
 	return (squel.select().field('max(id)').from('topics')).toString();
 };
 
-var get_user_detail = function(select_startid_query,max_id){
+var get_user_detail = function(db,new_topic,select_startid_query,max_id,onComplete){
 	db.get(select_startid_query,function(err,user){
 		var new_user_start_ids = [];
-		get_user_from_startid(user,new_user_start_ids,max_id);
+		new_user_start_ids=get_user_from_startid(user,new_user_start_ids,max_id);
 		var update_users_query = get_update_users_query(new_topic,new_user_start_ids);
-		get_update_topic(update_users_query,max_id)
+		get_update_topic(db,update_users_query,max_id,onComplete)
 	})
 };
 
-var get_topic_id = function(select_topicid_query){
+var get_topic_id = function(db,new_topic,select_topicid_query,onComplete){
 	db.get(select_topicid_query,function(ert,topic){
 		var select_startid_query = get_new_topic_query(new_topic.email);
 		var max_id = topic['max(id)'];
-		get_user_detail(select_startid_query,max_id);
+		get_user_detail(db,new_topic,select_startid_query,max_id,onComplete);
 	})
 };
 
 var _add_new_topic = function(new_topic,db,onComplete){
+	new_topic.start_time=new Date().getTime();
 	var insert_topic_query = get_insert_topic_query(new_topic).toString();
 	var select_topicid_query = get_select_for_maxid();
 
 	db.run(insert_topic_query,function(err){
-		get_topic_id(select_topicid_query);		
+		get_topic_id(db,new_topic,select_topicid_query,onComplete);		
 	})
 };
 

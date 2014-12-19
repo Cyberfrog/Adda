@@ -4,6 +4,8 @@ var topic_module = require('../own_modules/topic_module.js').init('./data/adda.d
 var new_topic_module = require('../own_modules/new_topic_module.js').init('./data/adda.db');
 var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
+var lib = require('../own_modules/adda_module.js').lib;
+
 var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
@@ -38,9 +40,11 @@ router.get('/join/:id',requireLogin, function(req, res) {
 router.get('/topic/:id',requireLogin,function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
 		var status_request ={topic_id:req.params.id,user:req.session.user};
-		console.log(status_request);
 		res.locals.status = topic_module.check_status(status_request,function(err,status){
 			res.locals.status = status
+			topic.start_time = lib.get_Time_Date(topic.start_time);
+			topic.closed_time = lib.get_Time_Date(topic.closed_time);
+			topic.comments = formatComments(topic.comments);
   			res.render('topic',topic);	
 		})
 	})
@@ -48,10 +52,16 @@ router.get('/topic/:id',requireLogin,function(req, res) {
 
 router.get('/getComments/:id',requireLogin, function(req, res) {
 	topic_module.get_comments(req.params.id,function(err,comments){
-  		res.json(comments);
+		var formatedComments =  formatComments(comments);
+  		res.json(formatedComments);
 	})
 })
-
+var formatComments =function(comments){
+	return comments.map(function(comment){
+		comment.time = lib.get_Time_Date(comment.time);
+		return comment;
+	})
+}
 router.post('/newComment/:id',requireLogin, function(req, res) {
 	var newComment = {
 		content:req.body.content,

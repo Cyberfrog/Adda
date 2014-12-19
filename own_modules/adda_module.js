@@ -7,6 +7,7 @@ lib.get_last5_comments=function(comments){
 };
 
 lib.get_Time_Date=function(milliseconds){
+	console.log("gggg",milliseconds);
 	if(!milliseconds){return ''};
 	var currentDate=new Date(milliseconds);
 	var hours=currentDate.getHours();
