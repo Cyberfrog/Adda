@@ -16,11 +16,33 @@ router.get('/logout',requireLogin, function(req, res) {
   req.session.destroy();
   res.redirect("/login");
 })
-
+router.get('/close/:id',requireLogin, function(req, res) {
+ var request = {user:req.session.user,topic_id:req.params.id};
+ topic_module.close_topic(request,function(err){
+ 	res.redirect("/topic/"+req.params.id);
+ })
+  
+})
+router.get('/leave/:id',requireLogin, function(req, res) {
+  var request = {user:req.session.user,topic_id:req.params.id};
+ 	topic_module.leave_topic(request,function(err){
+ 		res.redirect("/topic/"+req.params.id);
+ 	})
+})
+router.get('/join/:id',requireLogin, function(req, res) {
+  var request = {user:req.session.user,topic_id:req.params.id};
+ 	topic_module.join_topic(request,function(err){
+ 		res.redirect("/topic/"+req.params.id);
+ 	})
+})
 router.get('/topic/:id',requireLogin,function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
-		
-  		res.render('topic',topic);
+		var status_request ={topic_id:req.params.id,user:req.session.user};
+		console.log(status_request);
+		res.locals.status = topic_module.check_status(status_request,function(err,status){
+			res.locals.status = status
+  			res.render('topic',topic);	
+		})
 	})
 })
 

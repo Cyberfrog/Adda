@@ -1,6 +1,7 @@
 extends base
 block vars
  -var title = "TOPIC"
+ -var allowComment = true
 block scripts
  script(type ="text/javascript" src ="/javascripts/jquery-1.11.1.min.js")
  script(type ="text/javascript" src ="/javascripts/new_comment.js")
@@ -12,6 +13,19 @@ block content
  |Close Time : #{closed_time} 
  p
   |Description : #{description}
+ if closed_time
+  -allowComment=false
+  |CLOSED
+ else 
+  div
+   if status.starter
+    button(onclick="window.location.href='/close/#{id}'") Close
+   else if status.participate
+    button(onclick="window.location.href='/leave/#{id}'") Leave
+   else
+    -allowComment =false
+    button(onclick="window.location.href='/join/#{id}'") Join
+
  div Comments 
   button(id="btn_loadComplete") Load Complete
   ul(id="allComments")
@@ -22,6 +36,7 @@ block content
       | #{comment.content}
       br
       |#{comment.time}
- div 
-  input(type="text" name="comment",id="cmt_box")
-  button(id="btn_comment") Comment
+ if allowComment
+  div 
+   input(type="text" name="comment",id="cmt_box")
+   button(id="btn_comment") Comment
