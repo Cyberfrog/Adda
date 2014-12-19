@@ -12,6 +12,14 @@ block content
  |Close Time : #{closed_time} 
  p
   |Description : #{description}
+ div
+  if status.starter
+   button(onclick="window.location.href='/close/#{id}'") Close
+  else if status.participate
+   button(onclick="window.location.href='/leave/#{id}'") Leave
+  else
+   button(onclick="window.location.href='/join/#{id}'") Join
+
  div Comments 
   button(id="btn_loadComplete") Load Complete
   ul(id="allComments")
