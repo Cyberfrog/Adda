@@ -56,10 +56,7 @@ var get_update_topic = function(db,update_users_query,max_id,onComplete){
 var get_user_from_startid = function(user,new_user_start_ids,max_id){
 	if(!user.start_topic_ids){ 
 		new_user_start_ids.push(max_id);
-	console.log("0000000000000000",new_user_start_ids);
-
 		return new_user_start_ids;
-
 	}
 	new_user_start_ids = JSON.parse(user.start_topic_ids);
 	new_user_start_ids.push(max_id);
