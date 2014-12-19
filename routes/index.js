@@ -72,7 +72,7 @@ router.post('/register', function(req, res) {
 
 router.get('/dashboard', function(req, res) {
   user_module.get_user_summary(req.session.user,function(err,user){
-  	console.log("...",user);
+  		console.log("...",user);
   		res.render('dashboard',user);
   })
 });
