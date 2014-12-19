@@ -1,5 +1,6 @@
 var lib = require("../own_modules/new_topic_module.js");
 var topic_module = require("../own_modules/topic_module.js").init('tests/data/adda.db');
+var adda_records = require("../own_modules/user_module.js").init('tests/data/adda.db');
 
 var assert = require('chai').assert;
 var fs = require('fs');
@@ -28,10 +29,13 @@ describe('#new_topic_module',function(){
 					assert.equal(topic.close_time,undefined);
 					assert.equal(topic.admin,'ankur');
 					assert.lengthOf(topic.comments,0);
-					setTimeout(done,1);
+					adda_records.get_user_summary('ankur@ex.com',function(err,user){
+						assert.equal(user.name,'ankur');
+						assert.equal(user.email,'ankur@ex.com');
+						assert.deepEqual(user.start_topic_ids,[7])		
+						setTimeout(done,1);
+					});
 				})
-
-				//check in users table whether topic start updated or not
 			})
 		})
 	})
@@ -58,13 +62,9 @@ describe('#new_topic_module',function(){
 
 	// describe("#get_top_5_topics",function(){
 	// 	it('#gives the latest 5 topics according to the time of comments',function(done){
-	// 		var new_comment = {content:"Newwwwwss" , email : "ankur@ex.com" , topic_id : 2};
-	// 		topic_module.add_new_comment(new_comment,function(err){
-	// 			new_topic_module.get_top_5_topics(function(err,topics){
-	// 				assert.lengthOf(topics,2);
-	// 				done();
-	// 			})
-
+	// 		new_topic_module.get_top_5_topics(function(err,topics){
+	// 			console.log("***********",topics);
+	// 			done();
 	// 		})
 	// 	})
 	// })

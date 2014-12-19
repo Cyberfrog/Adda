@@ -3,6 +3,7 @@ block vars
 
 extends base
 block content
+ a(href="/logout") Logout
  hr
  link(rel="stylesheet" type="text/css" href="stylesheets/topics.css")
  center
@@ -27,6 +28,7 @@ block content
      h3 Search Topics-
      input(type="text" name="searchby" required)
      input(type="submit" value="search")
+
 
  if topics
   each topic in topics
