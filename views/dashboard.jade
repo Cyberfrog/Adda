@@ -4,13 +4,16 @@ block vars
 block scripts
 
 block content
- a(href="/logout") Logout
- p Name: #{name}
- h3 My Topics:
- div
-  ol
-   if topics
-    each topic in topics
-     li
-      a(href="/topic/#{topic.id}") #{topic.name} 
+ link(rel="stylesheet" type="text/css" href="stylesheets/dashboard.css")
+ hr
+ div(class= 'dashboard')
+  a(href="/logout") Logout
+   p Name: #{name}
+   h3 My Topics:
+  div
+   ol
+    if topics
+     each topic in topics
+      li
+       a(href="/topic/#{topic.id}") #{topic.name} 
 

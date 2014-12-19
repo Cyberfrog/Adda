@@ -6,5 +6,13 @@
 	margin-left: 35%;
 	padding: 5%;
 	background-color: #e8d5c1;
-
+};
+.dashboard{
+	display: inline-block;
+	text-align: center;
+	border:2px ;
+	border-style: solid;
+	margin-left: 35%;
+	padding: 5%;
+	background-color: #e8d5c1;
 };
