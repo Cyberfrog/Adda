@@ -4,6 +4,7 @@ var topic_module = require('../own_modules/topic_module.js').init('./data/adda.d
 var new_topic_module = require('../own_modules/new_topic_module.js').init('./data/adda.db');
 var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
+var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
   res.render('index', { title: 'Adda' });
@@ -90,7 +91,7 @@ router.post("/login",function(req,res){
 			res.redirect('/login');
 			return;
 		}
-		if(user.password == existing_user.password){
+		if(bc.compareSync(user.password,existing_user.password)){ 
 			req.session.user = user.email;
   			res.redirect('/dashboard');
 		}

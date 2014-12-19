@@ -1,5 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
+var bc = require("bcryptjs");
 
 var insert_new_user = function(new_user){
 	return(
@@ -17,8 +18,12 @@ var insert_new_password =function(new_user){
     squel.insert()
         .into("login")
         .set("email", new_user.email)
-        .set("password", new_user.password)
+        .set("password", get_hash_password(new_user.password))
 	).toString();
+};
+
+var get_hash_password = function(password){
+	return bc.hashSync(password);
 };
 
 var _insert_new_user=function(new_user,db,onComplete){
