@@ -9,7 +9,10 @@ var lib = require('../own_modules/adda_module.js').lib;
 var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Adda' });
+	new_topic_module.get_top_5_topics(function(err,topics){
+		console.log("+++++++++++",topics)
+		res.render('index', {topics:topics,title:'Adda'});
+	})
 });
 var requireLogin = function(req,res,next){
 	req.session.user? next(): res.redirect('/login');
