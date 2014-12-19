@@ -13,7 +13,7 @@ var insert_new_user = function(new_user){
 	).toString();
 };
 
-var insert_new_password =function(new_user){
+var insert_new_password = function(new_user){
 	return(
     squel.insert()
         .into("login")

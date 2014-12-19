@@ -87,19 +87,18 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-
-  var result = req.body;
-  res_module.insert_new_user(result,function(err){
-  	req.session.user = result.email;
-  	res.redirect('/dashboard');
-  });
+	var result = req.body;
+	res_module.insert_new_user(result,function(err){
+		req.session.user = result.email;
+		res.redirect('/dashboard');
+	});
 });
 
 
 router.get('/dashboard',requireLogin, function(req, res) {
-  user_module.get_user_summary(req.session.user,function(err,user){
-  		res.render('dashboard',user);
-  })
+	user_module.get_user_summary(req.session.user,function(err,user){
+		res.render('dashboard',user);
+	})
 });
 
 router.get("/login",function(req,res){
@@ -121,6 +120,5 @@ router.post("/login",function(req,res){
 		res.redirect('/login');	
 	})
 });
-
 
 module.exports = router;

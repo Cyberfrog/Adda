@@ -16,14 +16,11 @@ var init = function(location){
 			var db = new sqlite3.Database(location,onDBOpen);
 		};	
 	};
-
 	var records  = {
 		get_user_summary:operate(_get_user_summary)
 	};
 	return records;
 };
-
-exports.init =init;
 
 var _get_user_summary = function(email,db,onComplete){
 	var user_query = "select name, email, join_topic_ids,start_topic_ids"+
@@ -33,7 +30,6 @@ var _get_user_summary = function(email,db,onComplete){
 		user.start_topic_ids = user.start_topic_ids?JSON.parse(user.start_topic_ids):[]; 
 		get_topics_for_user(user,db,onComplete);
 	});
-
 }
 var get_topics_for_user =function(user,db,onComplete){
 	var all_topic_ids = user.join_topic_ids.concat(user.start_topic_ids);
@@ -47,5 +43,6 @@ var get_topics_for_user =function(user,db,onComplete){
 	 		user.topics.push(topic);
 		 	(id==lastId) && onComplete(err,user);
 	 	})
-	 })
+	})
 }
+exports.init =init;
