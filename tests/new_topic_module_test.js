@@ -1,5 +1,6 @@
 var lib = require("../own_modules/new_topic_module.js");
 var topic_module = require("../own_modules/topic_module.js").init('tests/data/adda.db');
+var adda_records = require("../own_modules/user_module.js").init('tests/data/adda.db');
 
 var assert = require('chai').assert;
 var fs = require('fs');
@@ -32,8 +33,12 @@ describe('#new_topic_module',function(){
 					assert.lengthOf(topic.comments,0);
 					setTimeout(done,1);
 				})
-
-				//check in users table whether topic start updated or not
+				adda_records.get_user_summary('ankur@ex.com',function(err,user){
+					assert.equal(user.name,'ankur');
+					assert.equal(user.email,'ankur@ex.com');
+					assert.deepEqual(user.start_topic_ids,[7])		
+					done();	
+				});
 			})
 		})
 	})
