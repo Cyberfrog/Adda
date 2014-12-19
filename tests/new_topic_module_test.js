@@ -19,26 +19,23 @@ describe('#new_topic_module',function(){
 			var new_topic = {
 				name : 'step',
 				description : 'software technology excellence programme',
-				email : 'ankur@ex.com',
-				start_time : 000001
+				email : 'ankur@ex.com'
 			}
 			new_topic_module.add_new_topic(new_topic,function(err,topic_id){
 				assert.notOk(err);
 				topic_module.get_topic_summary(topic_id,function(err,topic){
 					assert.equal(topic.name,'step');
 					assert.equal(topic.description,'software technology excellence programme');
-					assert.equal(topic.start_time,000001);
 					assert.equal(topic.close_time,undefined);
 					assert.equal(topic.admin,'ankur');
 					assert.lengthOf(topic.comments,0);
-					setTimeout(done,1);
+					adda_records.get_user_summary('ankur@ex.com',function(err,user){
+						assert.equal(user.name,'ankur');
+						assert.equal(user.email,'ankur@ex.com');
+						assert.deepEqual(user.start_topic_ids,[7])		
+						setTimeout(done,1);
+					});
 				})
-				adda_records.get_user_summary('ankur@ex.com',function(err,user){
-					assert.equal(user.name,'ankur');
-					assert.equal(user.email,'ankur@ex.com');
-					assert.deepEqual(user.start_topic_ids,[7])		
-					done();	
-				});
 			})
 		})
 	})
@@ -52,15 +49,16 @@ describe('#new_topic_module',function(){
 			})
 		})
 	})
+	
 	describe('#get_password_by_email',function(){
 		it('#gives password of email_id ankur@ex.com',function(done){
 			new_topic_module.get_password_by_email('ankur@ex.com',function(err,user){
 				assert.notOk(err);
 				assert.equal(user.password,'ankur12345');
 				done();
-			})
-		})
-	})
+			});
+		});
+	});
 
 	// describe("#get_top_5_topics",function(){
 	// 	it('#gives the latest 5 topics according to the time of comments',function(done){

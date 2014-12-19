@@ -17,7 +17,6 @@ describe('adda_records',function(){
 			adda_records.get_topic_summary(1,function(err,topic){
 				assert.equal(topic.name,'cricket');
 				assert.equal(topic.id,1);
-
 				assert.equal(topic.description,'sachin tendulkar');
 				assert.equal(topic.start_time,123454);
 				assert.equal(topic.close_time,undefined);
@@ -42,6 +41,7 @@ describe('adda_records',function(){
 			});
 		});
 	});
+	
 	describe("get_comments",function(){
 		it("get all comments of topic 1",function(done){
 			adda_records.get_comments(1,function(err,comments){
@@ -68,15 +68,46 @@ describe('adda_records',function(){
 	describe("join_topic",function(){
 		it("allow user to join new Topic",function(done){
 
-			adda_records.check_status({topic_id:'1',user:"ankur@ex.com"},function(err,status){
-				assert.equal(status.starter,false);
-				assert.equal(status.participate,true);
+			adda_records.join_topic({topic_id:'1',user:"dino@ex.com"},function(err){
+				adda_records.check_status({topic_id:'1',user:"dino@ex.com"},function(err,status){
+					assert.equal(status.starter,false);
+					assert.equal(status.participate,true);
+					done();					
+				}); 				
+			});
 
-				adda_records.check_status({topic_id:'1',user:"dolly@ex.com"},function(err,status){
-					assert.equal(status.starter,true);
+		});
+	});
+	describe("join_topic",function(){
+		it("allow user to join new Topic",function(done){
+			adda_records.join_topic({topic_id:'1',user:"dino@ex.com"},function(err){
+				adda_records.check_status({topic_id:'1',user:"dino@ex.com"},function(err,status){
+					assert.equal(status.starter,false);
+					assert.equal(status.participate,true);
+					done();					
+				}); 				
+			});
+			
+		});
+	});
+	describe("leave_topic",function(){
+		it("allow user to leave Topic",function(done){
+			adda_records.leave_topic({topic_id:'1',user:"ankur@ex.com"},function(err){
+				adda_records.check_status({topic_id:'1',user:"ankur@ex.com"},function(err,status){
+					assert.equal(status.starter,false);
 					assert.equal(status.participate,false);
 					done();					
 				}); 				
+			});
+		});
+	});
+	describe("close_topic",function(){
+		it("allow user to close_topic",function(done){
+			adda_records.close_topic({topic_id:'1',user:"dolly@ex.com"},function(err){
+				adda_records.get_topic_summary(1,function(err,topic){
+					assert.ok(topic.closed_time);
+					done();
+				}) 				
 			});
 		});
 	});
