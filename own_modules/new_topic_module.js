@@ -1,5 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
+var _ = require("lodash");
 
 var init = function(location){
 	var operate = function(operation){
@@ -22,7 +23,7 @@ var init = function(location){
 		add_new_topic : operate(_add_new_topic),
 		search_topic_by_name : operate(_search_topic_by_name),
 		get_password_by_email : operate(_get_password_by_email),
-		// get_top_5_topics : operate(_get_top_5_topics)
+		get_top_5_topics : operate(_get_top_5_topics)
 	};
 	return records;
 };
@@ -88,23 +89,36 @@ var _get_password_by_email = function(email,db,onComplete){
 	})
 };
 
-// var get_all_topicid_query = function(){
-// 	return squel.select().from("comments").field("topic_id").order("time",false);
-// };
+var get_all_topicid_query = function(){
+	return squel.select().from("comments").field("topic_id").order("time",false);
+};
 
-// var get_top_5_topics = function(){
-// 	return squel.select().from("topics").field
-// };
+var get_top_5_topics = function(id){
+	return squel.select().from("topics").field("name").where("id="+id);
+};
 
-// var _get_top_5_topics = function(db,onComplete){
-// 	var comment_query= get_all_topicid_query().toString();
-// 	console.log("~~~~~~~",query);
-// 	db.all(query,function(err,topics){
+var getTopicIds = function(comments){
+	return comments.map(function(c){
+		return c.topic_id;
+	})
+}
+var _get_top_5_topics = function(db,onComplete){
+	var all_topic_names = [];
+	var comment_query= get_all_topicid_query().toString();
+	db.all(comment_query,function(err,comments){
+		var ids = getTopicIds(comments)
+		ids = _.uniq(ids);
 		
-// 		var topic_query = get_top_5_topics(topics).toString();
-// 		console.log(topics,"^^^^^^^^")
-// 	})
-// 	onComplete(null);
-// };
+		ids.forEach(function(id,index){
+			var topic_query = get_top_5_topics(id).toString();
+
+			db.get(topic_query,function(err,topic){
+				all_topic_names.push(topic.name);
+				if(index == ids.length-1 || index==5)
+					onComplete(null,all_topic_names);
+			})
+		})
+	})
+};
 
 exports.init =init;

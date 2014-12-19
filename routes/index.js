@@ -6,7 +6,10 @@ var user_module = require('../own_modules/user_module.js').init('./data/adda.db'
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Adda' });
+	new_topic_module.get_top_5_topics(function(err,topics){
+		console.log("+++++++++++",topics)
+		res.render('index', {topics:topics,title:'Adda'});
+	})
 });
 var requireLogin = function(req,res,next){
 	req.session.user? next(): res.redirect('/login');
