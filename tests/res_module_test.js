@@ -19,10 +19,8 @@ describe('res_module',function(){
 		it('inserts new registered user',function(done){
 			var new_user = {name : 'Kaddoo',email:'kaddoo@lauki.com',password : 'kaddoo123'};
 			res_module.insert_new_user(new_user,function(err){
-				console.log(err);
 				assert.notOk(err);
 				user_module.get_user_summary(new_user.email,function(err,user){
-					console.log("--------------",user);
 					assert.equal(user.name,"Kaddoo");
 					// assert.equal(user.password,"kaddoo123");
 					done();

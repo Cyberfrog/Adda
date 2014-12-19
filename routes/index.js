@@ -8,24 +8,28 @@ var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 router.get('/', function(req, res) {
   res.render('index', { title: 'Adda' });
 });
-
 var requireLogin = function(req,res,next){
-	req.user? next(): res.redirect('/login');
+	req.session.user? next(): res.redirect('/login');
 };
-router.get('/topic/:id', function(req, res) {
+router.get('/logout',requireLogin, function(req, res) {
+  req.session.destroy();
+  res.redirect("/login");
+})
+
+router.get('/topic/:id',requireLogin,function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
 		
   		res.render('topic',topic);
 	})
 })
 
-router.get('/getComments/:id', function(req, res) {
+router.get('/getComments/:id',requireLogin, function(req, res) {
 	topic_module.get_comments(req.params.id,function(err,comments){
   		res.json(comments);
 	})
 })
 
-router.post('/newComment/:id', function(req, res) {
+router.post('/newComment/:id',requireLogin, function(req, res) {
 	var newComment = {
 		content:req.body.content,
 		email:req.session.user,
@@ -37,7 +41,7 @@ router.post('/newComment/:id', function(req, res) {
 	})
 })
 
-router.get('/topics',function(req, res){
+router.get('/topics',requireLogin,function(req, res){
 	var topic_name =req.query.searchby;
 	if(topic_name){
 		new_topic_module.search_topic_by_name(topic_name,function(err,topics){
@@ -48,7 +52,7 @@ router.get('/topics',function(req, res){
 	res.render('topics');
 })
 
-router.post('/topics',function(req, res){
+router.post('/topics',requireLogin,function(req, res){
 	var new_topic = req.body;
 	new_topic.email = req.session.user;
 	new_topic_module.add_new_topic(new_topic,function(err,id){
@@ -70,7 +74,7 @@ router.post('/register', function(req, res) {
 });
 
 
-router.get('/dashboard', function(req, res) {
+router.get('/dashboard',requireLogin, function(req, res) {
   user_module.get_user_summary(req.session.user,function(err,user){
   		console.log("...",user);
   		res.render('dashboard',user);
