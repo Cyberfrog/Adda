@@ -56,4 +56,17 @@ describe('#new_topic_module',function(){
 			})
 		})
 	})
+
+	// describe("#get_top_5_topics",function(){
+	// 	it('#gives the latest 5 topics according to the time of comments',function(done){
+	// 		var new_comment = {content:"Newwwwwss" , email : "ankur@ex.com" , topic_id : 2};
+	// 		topic_module.add_new_comment(new_comment,function(err){
+	// 			new_topic_module.get_top_5_topics(function(err,topics){
+	// 				assert.lengthOf(topics,2);
+	// 				done();
+	// 			})
+
+	// 		})
+	// 	})
+	// })
 });
