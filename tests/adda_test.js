@@ -17,7 +17,6 @@ describe('adda_records',function(){
 			adda_records.get_topic_summary(1,function(err,topic){
 				assert.equal(topic.name,'cricket');
 				assert.equal(topic.id,1);
-
 				assert.equal(topic.description,'sachin tendulkar');
 				assert.equal(topic.start_time,123454);
 				assert.equal(topic.close_time,undefined);
@@ -42,6 +41,7 @@ describe('adda_records',function(){
 			});
 		});
 	});
+	
 	describe("get_comments",function(){
 		it("get all comments of topic 1",function(done){
 			adda_records.get_comments(1,function(err,comments){

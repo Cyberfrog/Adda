@@ -47,13 +47,14 @@ describe('#new_topic_module',function(){
 			})
 		})
 	})
+	
 	describe('#get_password_by_email',function(){
 		it('#gives password of email_id ankur@ex.com',function(done){
 			new_topic_module.get_password_by_email('ankur@ex.com',function(err,user){
 				assert.notOk(err);
 				assert.equal(user.password,'ankur12345');
 				done();
-			})
-		})
-	})
+			});
+		});
+	});
 });

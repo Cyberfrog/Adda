@@ -12,7 +12,7 @@ var insert_new_user = function(new_user){
 	).toString();
 };
 
-var insert_new_password =function(new_user){
+var insert_new_password = function(new_user){
 	return(
     squel.insert()
         .into("login")
@@ -21,9 +21,9 @@ var insert_new_password =function(new_user){
 	).toString();
 };
 
-var _insert_new_user=function(new_user,db,onComplete){
-	var insert_user_query=insert_new_user(new_user);
-	var insert_pwd_query=insert_new_password(new_user);
+var _insert_new_user = function(new_user,db,onComplete){
+	var insert_user_query = insert_new_user(new_user);
+	var insert_pwd_query = insert_new_password(new_user);
 	db.run(insert_user_query,function(err){
 		db.run(insert_pwd_query,function(err){
 			onComplete(null);

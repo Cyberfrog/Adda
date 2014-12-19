@@ -13,7 +13,6 @@ var requireLogin = function(req,res,next){
 };
 router.get('/topic/:id', function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
-		
   		res.render('topic',topic);
 	})
 })
@@ -60,16 +59,15 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  var result = req.body;
-  res_module.insert_new_user(result,function(err){
-  	req.session.user = result.email;
-  	res.redirect('/dashboard');
-  });
+	var result = req.body;
+	res_module.insert_new_user(result,function(err){
+		req.session.user = result.email;
+		res.redirect('/dashboard');
+	});
 });
 
 router.get('/dashboard',function(req, res){
 	res.render('dashboard');
- 
 });
 
 router.get("/login",function(req,res){
