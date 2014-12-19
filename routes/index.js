@@ -18,8 +18,12 @@ router.get('/logout',requireLogin, function(req, res) {
 
 router.get('/topic/:id',requireLogin,function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
-		
-  		res.render('topic',topic);
+		var status_request ={topic_id:req.params.id,user:req.session.user};
+		console.log(status_request);
+		res.locals.status = topic_module.check_status(status_request,function(err,status){
+			res.locals.status = status
+  			res.render('topic',topic);	
+		})
 	})
 })
 
