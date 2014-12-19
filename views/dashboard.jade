@@ -1,8 +1,16 @@
-extends layout
+extends base
 block vars
- - var title = "DashBoard"
+ -var title = "dashbord"
+block scripts
 
 block content
-  h1 Hellllooooooooooooooooooooooooo..............
-  if error
-   p ERROR: #{error}
+ a(href="/logout") Logout
+ p Name: #{name}
+ h3 My Topics:
+ div
+  ol
+   if topics
+    each topic in topics
+     li
+      a(href="/topic/#{topic.id}") #{topic.name} 
+

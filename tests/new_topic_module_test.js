@@ -21,9 +21,9 @@ describe('#new_topic_module',function(){
 				email : 'ankur@ex.com',
 				start_time : 000001
 			}
-			new_topic_module.add_new_topic(new_topic,function(err){
+			new_topic_module.add_new_topic(new_topic,function(err,topic_id){
 				assert.notOk(err);
-				topic_module.get_topic_summary(3,function(err,topic){
+				topic_module.get_topic_summary(topic_id,function(err,topic){
 					assert.equal(topic.name,'step');
 					assert.equal(topic.description,'software technology excellence programme');
 					assert.equal(topic.start_time,000001);
@@ -40,9 +40,9 @@ describe('#new_topic_module',function(){
 
 	describe('#search_topic_by_name',function(){
 		it('#gives all topics starting with name sachin',function(done){
-			new_topic_module.search_topic_by_name('sachin',function(err,topics){
+			new_topic_module.search_topic_by_name('cricket',function(err,topics){
 				assert.lengthOf(topics,1);
-				assert.deepEqual(topics[0],{id:2,name:"sachin"});
+				assert.deepEqual(topics[0],{id:1,name:"cricket"});
 				done();
 			})
 		})
@@ -57,4 +57,17 @@ describe('#new_topic_module',function(){
 			});
 		});
 	});
+
+	// describe("#get_top_5_topics",function(){
+	// 	it('#gives the latest 5 topics according to the time of comments',function(done){
+	// 		var new_comment = {content:"Newwwwwss" , email : "ankur@ex.com" , topic_id : 2};
+	// 		topic_module.add_new_comment(new_comment,function(err){
+	// 			new_topic_module.get_top_5_topics(function(err,topics){
+	// 				assert.lengthOf(topics,2);
+	// 				done();
+	// 			})
+
+	// 		})
+	// 	})
+	// })
 });

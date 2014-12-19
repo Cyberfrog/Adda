@@ -15,5 +15,3 @@ lib.get_Time_Date=function(milliseconds){
 	var date=currentDate.getDate();
 	return hours+":"+minutes+" "+date+"/"+month+"/"+year;
 };
-
-console.log(lib.get_Time_Date(1418962184252));

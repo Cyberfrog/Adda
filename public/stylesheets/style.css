@@ -1,8 +1,17 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.homeButton {
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 90%;
+	font-size: 150%;
 }
 
-a {
-  color: #00B7FF;
+.heading {
+	text-align: center;
+}
+
+.loginBlock {
+	text-align: center;
+	/*border: 1px solid steelblue;*/
+	display: inline-block;
+	margin-left: 45%;
 }
