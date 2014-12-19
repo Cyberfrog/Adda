@@ -3,9 +3,12 @@ doctype html
 html
  head
   title #{title}
+  link(rel="stylesheet" type="text/css" href="stylesheets/style.css")
   block scripts
  body
-  h1 ADDA
-  h2 #{title}
+  div(class="homeButton")
+   a(href="/dashboard") Home
+  h1(class="heading") ADDA
+  h2(class="heading") #{title}
   block content
  

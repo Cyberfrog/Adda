@@ -21,7 +21,8 @@ var init = function(location){
 	var records  = {
 		add_new_topic : operate(_add_new_topic),
 		search_topic_by_name : operate(_search_topic_by_name),
-		get_password_by_email : operate(_get_password_by_email)
+		get_password_by_email : operate(_get_password_by_email),
+		// get_top_5_topics : operate(_get_top_5_topics)
 	};
 	return records;
 };
@@ -82,10 +83,28 @@ var _search_topic_by_name = function(topic_name,db,onComplete){
 
 var _get_password_by_email = function(email,db,onComplete){
 	var query = squel.select().field("password").from("login").where("email='"+email+"'").toString();
-	console.log("+++++++++++++++++")
 	db.get(query,function(err,user){
 		onComplete(null,user);
 	})
 };
+
+// var get_all_topicid_query = function(){
+// 	return squel.select().from("comments").field("topic_id").order("time",false);
+// };
+
+// var get_top_5_topics = function(){
+// 	return squel.select().from("topics").field
+// };
+
+// var _get_top_5_topics = function(db,onComplete){
+// 	var comment_query= get_all_topicid_query().toString();
+// 	console.log("~~~~~~~",query);
+// 	db.all(query,function(err,topics){
+		
+// 		var topic_query = get_top_5_topics(topics).toString();
+// 		console.log(topics,"^^^^^^^^")
+// 	})
+// 	onComplete(null);
+// };
 
 exports.init =init;

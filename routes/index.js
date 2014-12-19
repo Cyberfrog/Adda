@@ -39,7 +39,6 @@ router.post('/newComment/:id',requireLogin, function(req, res) {
 		email:req.session.user,
 		topic_id:req.params.id
 	}
-	console.log(".......");
 	topic_module.add_new_comment(newComment,function(err){
 	  res.end();
 	})
@@ -80,7 +79,6 @@ router.post('/register', function(req, res) {
 
 router.get('/dashboard',requireLogin, function(req, res) {
   user_module.get_user_summary(req.session.user,function(err,user){
-  	console.log("...",user);
   		res.render('dashboard',user);
   })
 });
@@ -92,6 +90,10 @@ router.get("/login",function(req,res){
 router.post("/login",function(req,res){
 	var user = req.body;
 	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
+		if(!existing_user){
+			res.redirect('/login');
+			return;
+		}
 		if(user.password == existing_user.password){
 			req.session.user = user.email;
   			res.redirect('/dashboard');
