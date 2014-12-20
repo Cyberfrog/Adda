@@ -2,6 +2,7 @@ var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
 var _ = require("lodash");
 // git testing
+//hhhhhhhhhh
 var init = function(location){
 	var operate = function(operation){
 		return function(){
