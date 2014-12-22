@@ -21,6 +21,7 @@ describe('res_module',function(){
 				assert.notOk(err);
 				user_module.get_user_summary(new_user.email,function(err,user){
 					assert.equal(user.name,"Kaddoo");
+					assert.equal(5,2);
 					done();
 				});
 			});
