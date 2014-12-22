@@ -10,7 +10,6 @@ var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
 	new_topic_module.get_top_5_topics(function(err,topics){
-		console.log("+++++++++++",topics)
 		res.render('index', {topics:topics,title:'Adda'});
 	})
 });
