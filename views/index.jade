@@ -1,11 +1,10 @@
 extends base
-
+block vars
+ -var title =""
 block content
-  center
-   h1= title
   hr
   center
-   h4 Welcome to #{title}.....
+   h4 Welcome to Adda.....
     |Its a social networking site
     br
     |Please 
@@ -14,9 +13,10 @@ block content
     a(href="/login") login
     |&nbsp;to continue
     hr
-   p 
-    div(class="first_page") 
-      h2 Latest Discussions:
-       each t in topics
-        li #{t}
+  p 
+   div 
+    h2 Latest Discussions:
+    ul
+     each t in topics
+      li #{t}
     

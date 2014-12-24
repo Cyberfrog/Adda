@@ -9,7 +9,6 @@ var session = require("express-session");
 
 var routes = require('./routes/index');
 var app = express();
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -19,9 +18,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({name:'adda',secret:"hey"}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.getSocket = function(){
+    return  app.socket;
+}
+routes.getSocket = app.getSocket;
 
 app.use('/', routes);
-
 
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
