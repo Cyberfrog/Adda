@@ -28,11 +28,11 @@ block content
      h3 Search Topics-
      input(type="text" name="searchby" required)
      input(type="submit" value="search")
+    if topics
+     each topic in topics
+      a(href="/topic/#{topic.id}") #{topic.name}
+      br
 
 
- if topics
-  each topic in topics
-   a(href="/topic/#{topic.id}") #{topic.name}
-   br
 
 

@@ -1,18 +1,22 @@
-extends layout
+extends base
 
 block content
-  h1= title
-  p Welcome to #{title}.....
-   |Its a social networking site
-   br
-   |Please 
-   a(href="/register") register
-   |&nbsp;or 
-   a(href="/login") login
-   |&nbsp;to continue
+  center
+   h1= title
+  hr
+  center
+   h4 Welcome to #{title}.....
+    |Its a social networking site
+    br
+    |Please 
+    a(href="/register") register
+    |&nbsp;or 
+    a(href="/login") login
+    |&nbsp;to continue
+    hr
    p 
-    h2 Latest Discussions:
-    ol 
-     each t in topics
-      li #{t}
+    div(class="first_page") 
+      h2 Latest Discussions:
+       each t in topics
+        li #{t}
     
