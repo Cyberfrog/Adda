@@ -35,7 +35,7 @@ var _close_topic =function(request,db,onComplete){
 //	var topic_query = "select email from topics where id="+request.topic_id;
 	var set_time_query="update topics set closed_time = $time where id="+request.topic_id;
 		var time_params ={"$time":new Date().getTime()};
-		db.run(set_time_query,time_params,function(err){
+		db.run(set_time_query,time_params,function(err){	
 			onComplete(err);
 		});
 

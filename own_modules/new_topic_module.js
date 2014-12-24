@@ -1,7 +1,6 @@
 var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
 var _ = require("lodash");
-
 var init = function(location){
 	var operate = function(operation){
 		return function(){
@@ -57,9 +56,7 @@ var get_update_topic = function(db,update_users_query,max_id,onComplete){
 var get_user_from_startid = function(user,new_user_start_ids,max_id){
 	if(!user.start_topic_ids){ 
 		new_user_start_ids.push(max_id);
-
 		return new_user_start_ids;
-
 	}
 	new_user_start_ids = JSON.parse(user.start_topic_ids);
 	new_user_start_ids.push(max_id);
