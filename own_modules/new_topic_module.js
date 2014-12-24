@@ -134,10 +134,8 @@ var _get_top_5_topics = function(db,onComplete){
 	var comment_query= get_all_topicid_query().toString();
 
 	db.all(comment_query,function(err,comments){
-		console.log("comments-",comments)
 		var ids = getTopicIds(comments)
 		ids = _.uniq(ids).reverse();
-		console.log("ids-",ids)
 		
 		ids.forEach(function(id,index){
 			var topic_query = get_top_5_topics(id).toString();

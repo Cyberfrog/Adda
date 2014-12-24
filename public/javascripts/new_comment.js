@@ -2,14 +2,15 @@ var  loadComments = function(){
 	$.ajax("/getComments/"+getId())
 		.done(function(data){
 			console.log(data);
-			var listed_data =getList(data);
+			var listed_data =getLists(data);
 			$("#allComments").html(listed_data);
 		});
 }
-var getList = function(comments){
-	return comments.map(function(comment){
+var getLists = function(comments){
+	return comments.map(list).join("\r\n");
+}
+var list =function(comment){
 		return '<li><div>'+comment.name+": "+comment.content+"<br>"+comment.time+"</div></li>";
-	}).join("\r\n");
 }
 var getId = function(){
 	var location = window.location.href.split('/');
@@ -17,15 +18,20 @@ var getId = function(){
 		return id;
 }
 var onPageLoad =function(){
+	var socket = io.connect('http://localhost');
+	socket.on('new_comment',function(data){
+	 	var comment=$("#allComments").html();
+	 	comment += list(data.comment);
+	 	$("#allComments").html(comment); 		
+	});
 	$("#btn_comment").click(function(){
 		var id = getId();
 		var content =$("#cmt_box").val();
-		$.ajax({url:"/newComment/"+id,type:"POST",data:"content="+content})
-		.done(function(){
-			window.location.href = "/topic/"+id;
-		});
+		$("#cmt_box").val('');
+		$.ajax({url:"/newComment/"+id,type:"POST",data:"content="+content});
 	});
+	
 	$("#btn_loadComplete").click(loadComments)
 }
 
-$(onPageLoad)
+$(onPageLoad);

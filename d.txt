@@ -1,0 +1,8 @@
+[31m  1 failing[0m
+
+[0m  1) #new_topic_module #add_new_topic #adds a new topic step:
+[0m[31m     Uncaught AssertionError: expected 2 to equal 1[0m[90m
+      at d:\Projects\Adda\tests\new_topic_module_test.js:34:14
+      at Statement.<anonymous> (d:\Projects\Adda\own_modules\user_module.js:44:21)
+[0m
+

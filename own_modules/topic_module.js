@@ -111,8 +111,17 @@ var _add_new_comment = function(new_comment,db,onComplete){
 								"$time":new Date().getTime(),
 								"$email":new_comment.email};
 	db.run(comment_query,comment_query_params,function(err){
-		onComplete(err);
+		getUserName(new_comment.email,db,function(err,name){
+				new_comment.name = name;
+				onComplete(err,new_comment);
+		});
 	})							
 };
+var getUserName =function(email,db,onComplete){
+	var user_query = "select name from users where email='"+email+"'";
+	db.get(user_query,function(err,user){
+		onComplete(null,user.name);
+	});
+}
 
 exports.init =init;

@@ -5,12 +5,12 @@ var new_topic_module = require('../own_modules/new_topic_module.js').init('./dat
 var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 var lib = require('../own_modules/adda_module.js').lib;
-
+// var server =router.get_server();
+// console.log(server);
 var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
 	new_topic_module.get_top_5_topics(function(err,topics){
-		console.log("+++++++++++",topics)
 		res.render('index', {topics:topics,title:'Adda'});
 	})
 });
@@ -65,17 +65,25 @@ var formatComments =function(comments){
 		return comment;
 	})
 }
+
 router.post('/newComment/:id',requireLogin, function(req, res) {
 	var newComment = {
 		content:req.body.content,
 		email:req.session.user,
 		topic_id:req.params.id
 	}
-	topic_module.add_new_comment(newComment,function(err){
+	topic_module.add_new_comment(newComment,function(err,comment){
+		comment.time = new Date();
+	  broadcastOnSocket(comment)
 	  res.end();
 	})
+	
 })
-
+var broadcastOnSocket =function(comment){
+	var socket =router.getSocket();
+	console.log("socket:",socket.id);
+	socket.emit("new_comment",{comment:comment})
+}
 router.get('/topics',requireLogin,function(req, res){
 	var topic_name =req.query.searchby;
 	if(topic_name){
