@@ -131,15 +131,16 @@ router.post("/login",function(req,res){
 	var user = req.body;
 	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
 		if(!existing_user){
-			res.redirect('/login');
+			res.render('login',{error:'please write your right email and password'});
 			return;
 		}
 		if(bc.compareSync(user.password,existing_user.password)){ 
 			req.session.user = user.email;
   			res.redirect('/dashboard');
 		}
-		else
-		res.redirect('/login');	
+		else{
+  		res.render('login',{error:'please write your right email and password'});
+  		}
 	})
 });
 

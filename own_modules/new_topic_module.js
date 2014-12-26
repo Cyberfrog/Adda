@@ -1,6 +1,8 @@
 var sqlite3 = require("sqlite3").verbose();
 var squel = require("squel");
 var _ = require("lodash");
+var Promise = require('promise');
+
 var init = function(location){
 	var operate = function(operation){
 		return function(){
@@ -114,35 +116,11 @@ var get_all_topicid_query = function(){
 	return squel.select().from("comments").field("topic_id").order("time");
 };
 
-var get_top_5_topics = function(id){
-	return squel.select().from("topics").field("name").where("id="+id);
-};
 
-var getTopicIds = function(comments){
-	return comments.map(function(c){
-		return c.topic_id;
-	})
-}
+
 var _get_top_5_topics = function(db,onComplete){
-	var all_topic_names = [];
-	var comment_query= get_all_topicid_query().toString();
-
-	db.all(comment_query,function(err,comments){
-		var ids = getTopicIds(comments)
-		ids = _.uniq(ids).reverse();
-		
-		ids.forEach(function(id,index){
-			var topic_query = get_top_5_topics(id).toString();
-			var complet = new Function();
-			if(index == 4 || index == ids.length-1 ){
-				complet=onComplete;
-			}
-			db.get(topic_query,function(err,topic){
-				all_topic_names.push(topic.name);
-				complet(null,all_topic_names);
-			})
-		})
-	})
+var top_five_topic_Query = "select distinct t.id,t.name from comments c, topics t where c.topic_id=t.id order by c.id desc limit 5";
+db.all(top_five_topic_Query,onComplete);
 };
 
 exports.init =init;

@@ -2,13 +2,14 @@ extends base
 block vars
  - var title = "Login"
 block content
- div(class="loginBlock")
-  form(action="/login" method="post")
-   p User Id (email):
-   input(type="text" name="email" required)
-   br
-   p Password
-   input(type="password" name="password" required)
-   br
-   br
-   input(type="submit" value = "Login")
+ if error
+  p INVALID_ENTRY: #{error}
+ form(action="/login" method="post")
+  p User Id (email):
+  input(type="text" name="email" required)
+  br
+  p Password
+  input(type="password" name="password" required)
+  br
+  br
+  input(type="submit" value = "Login")

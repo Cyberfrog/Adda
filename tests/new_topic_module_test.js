@@ -70,12 +70,12 @@ describe('#new_topic_module',function(){
 		});
 	});
 
-	// describe("#get_top_5_topics",function(){
-	// 	it('#gives the latest 5 topics according to the time of comments',function(done){
-	// 		new_topic_module.get_top_5_topics(function(err,topics){
-	// 			console.log("***********",topics);
-	// 			done();
-	// 		})
-	// 	})
-	// })
+	describe("#get_top_5_topics",function(){
+		it('#gives the latest 5 topics according to the time of comments',function(done){
+			new_topic_module.get_top_5_topics(function(err,topics){
+				assert.lengthOf(topics,5)
+				done();
+			})
+		})
+	})
 });
