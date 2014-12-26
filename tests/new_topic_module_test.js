@@ -41,12 +41,22 @@ describe('#new_topic_module',function(){
 	})
 
 	describe('#search_topic_by_name',function(){
-		it('#gives all topics starting with name sachin',function(done){
+		it('#gives all topics with name sachin',function(done){
 			new_topic_module.search_topic_by_name('cricket',function(err,topics){
 				assert.lengthOf(topics,1);
 				assert.deepEqual(topics[0],{id:1,name:"cricket"});
 				done();
 			})
+		})
+
+		it('#gives all topics containing the string c',function(done){
+			var expected = [{id:1,name:"cricket"},{id:2,name:"music"},{id:3,name:"racing"},{id:5,name:"chess"},
+				{id:6,name:"commedy"}];
+			new_topic_module.search_topic_by_name('c',function(err,topics){
+				assert.lengthOf(topics,5);
+				assert.deepEqual(topics,expected);
+				done();
+			})	
 		})
 	})
 	
