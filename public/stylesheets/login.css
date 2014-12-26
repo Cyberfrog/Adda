@@ -1,0 +1,28 @@
+.error{
+	color: red;
+	margin-right: 5%;
+	padding: 1%;
+}
+.textBox{
+}
+.btn{
+}
+.box{
+	margin-left: 30%;
+	margin-top: 10%; 
+}
+.login_box{
+	font-size: 20px;
+	display: inline-block;
+	border: 1px solid black;
+	padding: 5%;
+	margin-left: 5%;
+
+}
+.inputBox{
+	padding-top: 5%;
+}
+#btn_login{
+	padding: 5%;
+	width:100%;
+}

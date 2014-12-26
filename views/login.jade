@@ -1,15 +1,22 @@
 extends base
 block vars
  - var title = "Login"
+block scripts
+  link(rel="stylesheet" type="text/css" href="/stylesheets/login.css")
+
 block content
- if error
-  p INVALID_ENTRY: #{error}
+
  form(action="/login" method="post")
-  p User Id (email):
-  input(type="text" name="email" required)
-  br
-  p Password
-  input(type="password" name="password" required)
-  br
-  br
-  input(type="submit" value = "Login")
+  div(class="box")
+   if(error)
+    div(class="error") INVALID_ENTRY: #{error}
+   div(class="login_box")
+    div(class="inputBox") User Id (email):
+     br
+     input(class="textBox" type="email" name="email" required)
+ 
+    div(class="inputBox") Password:
+     br
+     input(class="textBox" type="password" name="password" required)
+    div(id="btn_login")
+     input(class ="btn" type="submit" value = "Login")
