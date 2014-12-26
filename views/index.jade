@@ -2,13 +2,14 @@ extends base
 block vars
  -var title =""
 block login
- |login
+ div(class="login")
+  span(class="login_span")
+   a(href="/login")
+    img(src="/images/login.png" height="10%" width="10%")
+   a(href="/register")
+    img(src="/images/register1.png" height="9%" width="8%")
+
 block content
-  h4 Welcome to Adda..... 
-   a(href="/register") register
-   |&nbsp;or 
-   a(href="/login") login
-  
   h2 Latest Discussions:
   ul
   each t in topics
