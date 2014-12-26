@@ -1,22 +1,16 @@
 extends base
 block vars
  -var title =""
+block login
+ |login
 block content
-  hr
-  center
-   h4 Welcome to Adda.....
-    |Its a social networking site
-    br
-    |Please 
-    a(href="/register") register
-    |&nbsp;or 
-    a(href="/login") login
-    |&nbsp;to continue
-    hr
-  p 
-   div 
-    h2 Latest Discussions:
-    ul
-     each t in topics
-      li #{t.name}
+  h4 Welcome to Adda..... 
+   a(href="/register") register
+   |&nbsp;or 
+   a(href="/login") login
+  
+  h2 Latest Discussions:
+  ul
+  each t in topics
+   li #{t.name}
     

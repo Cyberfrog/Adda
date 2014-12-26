@@ -6,9 +6,8 @@ html
   link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
   block scripts
  body
-  div(class="homeButton")
-   a(href="/dashboard") Home
-  h1(class="heading") ADDA
-  h2(class="heading") #{title}
-  block content
- 
+  div(class="wrapper")
+   div(class="header") Adda
+    block login
+   div(class="content")
+    block content 
