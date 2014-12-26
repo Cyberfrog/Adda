@@ -18,7 +18,7 @@ var getId = function(){
 		return id;
 }
 var onPageLoad =function(){
-	var socket = io.connect('http://localhost');
+	var socket = io.connect(window.location.hostname);
 	socket.on('new_comment',function(data){
 	 	var comment=$("#allComments").html();
 	 	comment += list(data.comment);

@@ -73,7 +73,7 @@ router.post('/newComment/:id',requireLogin, function(req, res) {
 		topic_id:req.params.id
 	}
 	topic_module.add_new_comment(newComment,function(err,comment){
-		comment.time = new Date();
+		comment.time = lib.get_Time_Date(new Date().getTime());
 	  broadcastOnSocket(comment)
 	  res.end();
 	})
@@ -82,7 +82,8 @@ router.post('/newComment/:id',requireLogin, function(req, res) {
 var broadcastOnSocket =function(comment){
 	var socket =router.getSocket();
 	console.log("socket:",socket.id);
-	socket.emit("new_comment",{comment:comment})
+	socket.broadcast.emit("new_comment",{comment:comment});
+	socket.emit("new_comment",{comment:comment});
 }
 router.get('/topics',requireLogin,function(req, res){
 	var topic_name =req.query.searchby;

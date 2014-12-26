@@ -6,7 +6,7 @@ block scripts
  script(type ="text/javascript" src ="/javascripts/jquery-1.11.1.min.js")
  script(type ="text/javascript" src ="/javascripts/new_comment.js")
  script(type ="text/javascript" src ="/javascripts/socket.io.js")
-
+ link(rel="stylesheet" type="text/css" href="/stylesheets/topic.css")
 block content
  a(href="/logout") Logout
  br
@@ -14,7 +14,8 @@ block content
  |Name : #{name}
  |Started by : #{admin}
  |Start Time : #{start_time}
- |Close Time : #{closed_time} 
+ if closed_time
+  |Close Time : #{closed_time} 
  p
   |Description : #{description}
  if closed_time
