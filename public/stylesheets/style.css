@@ -8,9 +8,40 @@
 .heading {
 	text-align: center;
 }
-
-.loginBlock {
-	text-align: center;
+.loginBlock{
 	display: inline-block;
-	margin-left: 45%;
-}
+	text-align: center;
+	border:2px ;
+	border-style: solid;
+	margin-left: 38%;
+	padding: 5%;
+	background-color: #e8d5c1;
+};
+.div_alignment{
+	display: inline-block;
+	text-align: center;
+	border:2px ;
+	border-style: solid;
+	margin-left: 35%;
+	padding: 5%;
+	background-color: #e8d5c1;
+	margin-top: 15%;
+};
+.first_page{
+	display: inline-block;
+	text-align: center;
+	border:2px ;
+	border-style: solid;
+	margin-left: 35%;
+	padding: 5%;
+	background-color: #e8d5c1;
+};
+.topic{
+	display: inline-block;
+	text-align: center;
+	border:2px;
+	border-style: solid;
+	margin-left: 3%;
+	padding: 5%;
+	background-color: #e8d5c1;
+};
