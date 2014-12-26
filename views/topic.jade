@@ -14,7 +14,8 @@ block content
  |Name : #{name}
  |Started by : #{admin}
  |Start Time : #{start_time}
- |Close Time : #{closed_time} 
+ if closed_time
+  |Close Time : #{closed_time} 
  p
   |Description : #{description}
  if closed_time
