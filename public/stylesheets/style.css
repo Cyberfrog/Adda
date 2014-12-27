@@ -1,7 +1,6 @@
 .wrapper{
 	height:100%;
-	width: 99%;
-	position: fixed;
+	width: 100%;
 }
 
 .header{
@@ -9,35 +8,52 @@
 	width: 100%;
 	background-color:#404049;
 	color: #ffffff;
-	text-align: center;
 }
 
 .content{
+	position: fixed;
+	margin-left: 2%;
 	height: 80%;
-	width: 100%;
-}
-
-/*div{
-	border: 1px solid black;
-}*/
-
-.login {
-	margin-right: -18%;
-	margin-top: -3%;
-	float: right;
-	vertical-align: text-bottom;	
+	width: 99%;
 }
 
 .adda {
-	margin-top: 1%;
-	font-size: 500%;
-	display: inline;
-}
-
-.login_span {
-}
-
-.slogan {
-	margin-right: -55%;
+	width: 28%;
+	padding-left: 40%;
 	display: inline-block;
+	font-size: 400%;
+	padding-top: 2%;
+}
+
+.login_register{
+	margin-top: 9%;
+	width: 15%;
+	margin-bottom: 2%;
+	float: right;
+	color: #ffffff;
+}
+
+.login{
+	height: 100%;
+	width: 45%;
+	display: inline-block;
+	text-align: center;
+}
+
+.register{
+	height: 100%;
+	width: 45%;
+	text-align: center;
+	display: inline-block;
+	float: right;
+}
+
+span{
+	padding-left: 30%;
+	vertical-align: top;
+	font-size: 30%;
+}
+
+a{
+	color: #ffffff;
 }
