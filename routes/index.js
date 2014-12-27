@@ -1,5 +1,3 @@
-console.log("Routes")
-
 var express = require('express');
 var router = express.Router();
 var topic_module = require('../own_modules/topic_module.js').init('./data/adda.db');
