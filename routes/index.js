@@ -1,5 +1,3 @@
-console.log("Routes")
-
 var express = require('express');
 var router = express.Router();
 var topic_module = require('../own_modules/topic_module.js').init('./data/adda.db');
@@ -7,8 +5,7 @@ var new_topic_module = require('../own_modules/new_topic_module.js').init('./dat
 var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 var lib = require('../own_modules/adda_module.js').lib;
-// var server =router.get_server();
-// console.log(server);
+
 var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {

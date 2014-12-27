@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-console.log("www")
 var debug = require('debug')('Adda');
 var app = require('../app');
 var socket_io = require("socket.io");
