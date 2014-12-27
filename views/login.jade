@@ -11,14 +11,15 @@ block content
     tr
      td User Id:
      td
-      input(type="email" name="email" required placeholder="email")
+      input(class="txtbox" type="email" name="email" required placeholder="email")
     tr  
      td Password:
      td
-      input(type="password" name="password" required placeholder="password")
+      input(class="txtbox" type="password" name="password" required placeholder="password")
     tr
-     td  
+     td 
+     td 
       input(class="btn" type="submit" value = "Login")
-    if(error)
-     div(class="error") Error: #{error} 
+   if(error)
+    div(class="error") Error: #{error} 
   
