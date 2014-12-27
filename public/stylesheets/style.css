@@ -1,4 +1,5 @@
 .wrapper{
+	height:100%;
 	width: 100%;
 }
 
@@ -12,6 +13,7 @@
 }
 
 .content{
+	position: fixed;
 	height: auto;
 	margin-left: 2%;
 	width: 99%;
@@ -57,4 +59,3 @@ span{
 a{
 	color: #ffffff;
 }
-
