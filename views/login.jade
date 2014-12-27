@@ -9,15 +9,12 @@ block content
   form(action="/login" method="post")
    table
     tr
-     td User Id:
      td
       input(class="txtbox" type="email" name="email" required placeholder="email")
     tr  
-     td Password:
      td
       input(class="txtbox" type="password" name="password" required placeholder="password")
     tr
-     td 
      td 
       input(class="btn" type="submit" value = "Login")
    if(error)
