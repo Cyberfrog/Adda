@@ -1,3 +1,5 @@
+console.log("Routes")
+
 var express = require('express');
 var router = express.Router();
 var topic_module = require('../own_modules/topic_module.js').init('./data/adda.db');
@@ -14,32 +16,37 @@ router.get('/', function(req, res) {
 		res.render('index', {topics:topics,title:'Adda'});
 	})
 });
+
 var requireLogin = function(req,res,next){
 	req.session.user? next(): res.redirect('/login');
 };
+
 router.get('/logout',requireLogin, function(req, res) {
-  req.session.destroy();
-  res.redirect("/login");
+	req.session.destroy();
+	res.redirect("/login");
 })
+
 router.get('/close/:id',requireLogin, function(req, res) {
- var request = {user:req.session.user,topic_id:req.params.id};
- topic_module.close_topic(request,function(err){
- 	res.redirect("/topic/"+req.params.id);
- })
-  
+	var request = {user:req.session.user,topic_id:req.params.id};
+	topic_module.close_topic(request,function(err){
+ 		res.redirect("/topic/"+req.params.id);
+ 	})
 })
+
 router.get('/leave/:id',requireLogin, function(req, res) {
   var request = {user:req.session.user,topic_id:req.params.id};
  	topic_module.leave_topic(request,function(err){
  		res.redirect("/topic/"+req.params.id);
  	})
 })
+
 router.get('/join/:id',requireLogin, function(req, res) {
   var request = {user:req.session.user,topic_id:req.params.id};
  	topic_module.join_topic(request,function(err){
  		res.redirect("/topic/"+req.params.id);
  	})
 })
+
 router.get('/topic/:id',requireLogin,function(req, res) {
 	topic_module.get_topic_summary(req.params.id,function(err,topic){
 		var status_request ={topic_id:req.params.id,user:req.session.user};
@@ -59,6 +66,7 @@ router.get('/getComments/:id',requireLogin, function(req, res) {
   		res.json(formatedComments);
 	})
 })
+
 var formatComments =function(comments){
 	return comments.map(function(comment){
 		comment.time = lib.get_Time_Date(comment.time);
@@ -74,17 +82,19 @@ router.post('/newComment/:id',requireLogin, function(req, res) {
 	}
 	topic_module.add_new_comment(newComment,function(err,comment){
 		comment.time = lib.get_Time_Date(new Date().getTime());
-	  broadcastOnSocket(comment)
-	  res.end();
+		broadcastOnSocket(comment)
+		res.end();
 	})
 	
 })
+
 var broadcastOnSocket =function(comment){
-	var socket =router.getSocket();
+	var socket = router.getSocket();
 	console.log("socket:",socket.id);
 	socket.broadcast.emit("new_comment",{comment:comment});
 	socket.emit("new_comment",{comment:comment});
 }
+
 router.get('/topics',requireLogin,function(req, res){
 	var topic_name =req.query.searchby;
 	if(topic_name){
@@ -131,7 +141,7 @@ router.post("/login",function(req,res){
 	var user = req.body;
 	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
 		if(!existing_user){
-			res.render('login',{error:'please write your right email and password'});
+			res.render('login',{error:'Invalid username and password.'});
 			return;
 		}
 		if(bc.compareSync(user.password,existing_user.password)){ 

@@ -1,22 +1,25 @@
 extends base
 block vars
  -var title =""
+block login
+ div(class="login_register_block")
+  div(class="login_block")
+   a(href="/login")
+    img(src="/images/login.png" class="login")
+    h3(class="login_register_link") Login
+  div(class="register_block")
+   a(href="/register")
+    img(src="/images/register1.png" height="9%" width="8%" class="register")
+    h3(class="login_register_link") Register
+
+
 block content
-  hr
-  center
-   h4 Welcome to Adda.....
-    |Its a social networking site
-    br
-    |Please 
-    a(href="/register") register
-    |&nbsp;or 
-    a(href="/login") login
-    |&nbsp;to continue
-    hr
-  p 
-   div 
-    h2 Latest Discussions:
-    ul
-     each t in topics
-      li #{t.name}
+ div(class="adda_image")
+  img(src="/images/adda.jpg" height="100%" width="100%")
+
+ div(class="topics")
+  h2 Latest Discussions:
+  ul
+   each t in topics
+    li #{t.name}
     

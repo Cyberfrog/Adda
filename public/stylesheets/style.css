@@ -1,47 +1,89 @@
-.homeButton {
-	display: inline-block;
-	margin-top: 10px;
-	margin-left: 90%;
-	font-size: 150%;
+.wrapper{
+	width: 100%;
 }
 
-.heading {
+.header{
+	text-align: center;
+	padding-top: 3%;
+	height: 30%;
+	width: 100%;
+	background-color:#404049;
+	color: #ffffff;
 	text-align: center;
 }
-.loginBlock{
+
+.content{
+	width: 100%;
+}
+
+div{
+	/*border: 1px solid black;*/
+}
+
+.login {
+	width: 100%; 
+	height: 100%;
+}
+
+.register {
+	width: 100%; 
+	height: 100%;
+}
+
+.adda {
+	margin-left: 5%;
+	margin-top: 10%;
+	font-size: 500%;
+	display: inline;
+}
+
+.login_register_block {
+	margin-top: -1%;
+	width:18%;
+	height: 30%;
+	display: inline;
+	float: right;
+}
+
+.slogan {
+	margin-left: 32%;
+	font-size: 150%;
 	display: inline-block;
-	text-align: center;
-	border:2px ;
-	border-style: solid;
-	margin-left: 38%;
-	padding: 5%;
-	background-color: #e8d5c1;
-};
-.div_alignment{
+}
+
+.adda_image {
+	padding-right:5%; 
+	width: 45%;
+	float: left;
 	display: inline-block;
-	text-align: center;
-	border:2px ;
-	border-style: solid;
-	margin-left: 35%;
-	padding: 5%;
-	background-color: #e8d5c1;
-	margin-top: 15%;
-};
-.first_page{
+}
+
+.topics {
+	padding-left:4%; 
+	font-size: 250%;
+	width: 45%;
+	height: auto;
+	float: right;
 	display: inline-block;
-	text-align: center;
-	border:2px ;
-	border-style: solid;
-	margin-left: 35%;
-	padding: 5%;
-	background-color: #e8d5c1;
-};
-.topic{
-	display: inline-block;
-	text-align: center;
-	border:2px;
-	border-style: solid;
-	margin-left: 3%;
-	padding: 5%;
-	background-color: #e8d5c1;
-};
+}
+
+.login_block {
+	margin-left: 10%;
+	float: left;
+	width:30%;
+	height: 100%;
+	display: inline;
+}
+
+.register_block {
+	margin-right: 10%;
+	float: right;
+	width:30%;
+	height: 100%;
+	display: inline;
+}
+
+.login_register_link {
+	color: steelblue;
+	font-size: 100%;
+}

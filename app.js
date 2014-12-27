@@ -1,3 +1,4 @@
+console.log("App")
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -18,12 +19,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({name:'adda',secret:"hey"}));
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.getSocket = function(){
     console.log("APP:socket",app.socket.id);
     return  app.socket;
 }
-routes.getSocket = app.getSocket;
 
+routes.getSocket = app.getSocket;
 app.use('/', routes);
 
 app.use(function(req, res, next) {
