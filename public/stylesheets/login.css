@@ -1,12 +1,10 @@
 .error{
 	color: red;
-	margin-right: 5%;
+	margin-left: 6%;
+	margin-right: 15%;
 	padding: 1%;
 }
-.textBox{
-}
-.btn{
-}
+
 .box{
 	margin-left: 30%;
 	margin-top: 10%; 
@@ -16,7 +14,7 @@
 	display: inline-block;
 	border: 1px solid black;
 	padding: 5%;
-	margin-left: 5%;
+	margin-left: 15%;
 
 }
 .inputBox{
