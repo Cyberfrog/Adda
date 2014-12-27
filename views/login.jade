@@ -9,12 +9,13 @@ block content
  form(action="/login" method="post")
   div(class="box")
    if(error)
-    div(class="error") INVALID_ENTRY: #{error}
+    div(class="error") Error: #{error}
    div(class="login_box")
     div(class="inputBox") User Id (email):
      input(class="textBox" type="email" name="email" required)
  
     div(class="inputBox") Password:
      input(class="textBox" type="password" name="password" required)
+     br
     div(id="btn_login")
      input(class ="btn" type="submit" value = "Login")

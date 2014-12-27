@@ -14,16 +14,18 @@ var list =function(comment){
 }
 var getId = function(){
 	var location = window.location.href.split('/');
-		var id = location[location.length-1];
-		return id;
+	var id = location[location.length-1];
+	return id;
 }
 var onPageLoad =function(){
 	var socket = io.connect(window.location.hostname);
+
 	socket.on('new_comment',function(data){
 	 	var comment=$("#allComments").html();
 	 	comment += list(data.comment);
 	 	$("#allComments").html(comment); 		
 	});
+
 	$("#btn_comment").click(function(){
 		var id = getId();
 		var content =$("#cmt_box").val();
