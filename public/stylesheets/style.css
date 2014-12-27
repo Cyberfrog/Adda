@@ -3,6 +3,8 @@
 }
 
 .header{
+	text-align: center;
+	padding-top: 3%;
 	height: 30%;
 	width: 100%;
 	background-color:#404049;
@@ -23,10 +25,10 @@
 }
 
 .login_register{
+	margin-top: 9%;
 	width: 15%;
-	display: inline-block;
-	margin-left: 15%;
-	text-align: right;
+	margin-bottom: 2%;
+	float: right;
 	color: #ffffff;
 }
 
@@ -55,16 +57,3 @@ a{
 	color: #ffffff;
 }
 
-.addaImage{
-	margin-top: 8%;
-	margin-left: 5%;
-	display: inline-block;
-}
-
-.data{
-	margin-top: 9%;
-	vertical-align: top;
-	margin-left: 15%;
-	display: inline-block;
-	text-align: left;
-}
