@@ -33,6 +33,11 @@ var onPageLoad =function(){
 	});
 	
 	$("#btn_loadComplete").click(loadComments)
+
+	$("#cmt_box").keypress(function(e){
+		e.keyCode == 13 && $("#btn_comment").click();
+        // return false;
+	})
 }
 
 $(onPageLoad);
