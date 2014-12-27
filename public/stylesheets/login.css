@@ -4,13 +4,17 @@
 	margin-right: 15%;
 	padding: 1%;
 }
-.login_image{
+
+td{
 	height: 80%;
-	width: 80%;
-	background-image: url(../images/login_temp.jpg);
+	width: 10%;
+
 }
 
 .objects{
-	float: left;
+	margin-left: 37%;
+	margin-top: 15%;
+	height: 100%;
+	width: 40%;
 }
 

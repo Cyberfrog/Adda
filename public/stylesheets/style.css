@@ -1,7 +1,8 @@
 .wrapper{
-	height:100%;
-	width: 100%;
-	overflow: scroll;
+	height:auto;
+	width: auto;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .header{
@@ -15,6 +16,7 @@
 	margin-left: 2%;
 	height: 70%;
 	width: 99%;
+
 }
 
 .adda {
