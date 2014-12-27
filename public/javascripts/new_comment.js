@@ -25,7 +25,6 @@ var onPageLoad =function(){
 	 	comment += list(data.comment);
 	 	$("#allComments").html(comment); 		
 	});
-
 	socket.on('close',function(data){
 	 	window.location.reload() 		
 	});
@@ -34,7 +33,7 @@ var onPageLoad =function(){
 		var id = getId();
 		var content =$("#cmt_box").val();
 		$("#cmt_box").val('');
-		$.ajax({url:"/newComment/"+id,type:"POST",data:"content="+content});
+		$.ajax({url:"/newComment/"+id,type:"POST", dataType: "json",data:{content:content}});
 	});
 	
 	$("#btn_loadComplete").click(loadComments)

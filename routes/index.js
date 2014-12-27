@@ -75,6 +75,7 @@ var formatComments =function(comments){
 }
 
 router.post('/newComment/:id',requireLogin, function(req, res) {
+	console.log("content",req.body.content);
 	var newComment = {
 		content:req.body.content,
 		email:req.session.user,
