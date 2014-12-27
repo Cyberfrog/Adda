@@ -4,23 +4,13 @@
 	margin-right: 15%;
 	padding: 1%;
 }
+.login_image{
+	height: 80%;
+	width: 80%;
+	background-image: url(../images/login_temp.jpg);
+}
 
-.box{
-	margin-left: 30%;
-	margin-top: 10%; 
+.objects{
+	float: left;
 }
-.login_box{
-	font-size: 20px;
-	display: inline-block;
-	border: 1px solid black;
-	padding: 5%;
-	margin-left: 15%;
 
-}
-.inputBox{
-	padding-top: 5%;
-}
-#btn_login{
-	padding: 5%;
-	width:100%;
-}
