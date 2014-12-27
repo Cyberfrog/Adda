@@ -5,17 +5,18 @@ block scripts
   link(rel="stylesheet" type="text/css" href="/stylesheets/login.css")
 
 block content
-
- form(action="/login" method="post")
-  div(class="box")
+ div(class="objects")
+  form(action="/login" method="post")
+   table
+    tr
+     td
+      input(class="txtbox" type="email" name="email" required placeholder="email")
+    tr  
+     td
+      input(class="txtbox" type="password" name="password" required placeholder="password")
+    tr
+     td 
+      input(class="btn" type="submit" value = "Login")
    if(error)
-    div(class="error") Error: #{error}
-   div(class="login_box")
-    div(class="inputBox") User Id (email):
-     input(class="textBox" type="email" name="email" required)
- 
-    div(class="inputBox") Password:
-     input(class="textBox" type="password" name="password" required)
-     br
-    div(id="btn_login")
-     input(class ="btn" type="submit" value = "Login")
+    div(class="error") Error: #{error} 
+  

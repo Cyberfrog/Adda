@@ -22,7 +22,6 @@ describe('adda_records',function(){
 				assert.equal(topic.close_time,undefined);
 				assert.equal(topic.admin,'dolly');
 				assert.lengthOf(topic.comments,2);
-				// assert.equal(2,3);
 				done();	
 			});
 		});
