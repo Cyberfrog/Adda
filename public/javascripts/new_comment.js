@@ -26,6 +26,10 @@ var onPageLoad =function(){
 	 	$("#allComments").html(comment); 		
 	});
 
+	socket.on('close',function(data){
+	 	window.location.reload() 		
+	});
+
 	$("#btn_comment").click(function(){
 		var id = getId();
 		var content =$("#cmt_box").val();
@@ -37,7 +41,6 @@ var onPageLoad =function(){
 
 	$("#cmt_box").keypress(function(e){
 		e.keyCode == 13 && $("#btn_comment").click();
-        // return false;
 	})
 }
 

@@ -26,6 +26,9 @@ router.get('/logout',requireLogin, function(req, res) {
 router.get('/close/:id',requireLogin, function(req, res) {
 	var request = {user:req.session.user,topic_id:req.params.id};
 	topic_module.close_topic(request,function(err){
+		var socket = router.getSocket();
+		socket.broadcast.emit('close')
+		socket.emit('close')
  		res.redirect("/topic/"+req.params.id);
  	})
 })
