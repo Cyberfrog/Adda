@@ -2,24 +2,20 @@ extends base
 block vars
  -var title =""
 block login
- div(class="login_register_block")
-  div(class="login_block")
-   a(href="/login")
-    img(src="/images/login.png" class="login")
-    h3(class="login_register_link") Login
-  div(class="register_block")
-   a(href="/register")
-    img(src="/images/register1.png" height="9%" width="8%" class="register")
-    h3(class="login_register_link") Register
-
-
+ div(class="login_register")
+  a(href="/login")
+   div(class="login")
+    img(src="images/login.png" height="30%" width="30%")
+    br
+    | Login
+  a(href="/register")
+   div(class="register")
+    img(src="images/register1.png" height="30%" width="30%")
+    br
+    | Register
 block content
- div(class="adda_image")
-  img(src="/images/adda.jpg" height="100%" width="100%")
-
- div(class="topics")
-  h2 Latest Discussions:
-  ul
+  h1 Latest Discussions:
+  ol
    each t in topics
     li #{t.name}
     
