@@ -1,5 +1,4 @@
 .wrapper{
-	height:100%;
 	width: 100%;
 }
 
@@ -15,7 +14,7 @@
 .content{
 	position: fixed;
 	margin-left: 2%;
-	height: 80%;
+	height: auto;
 	width: 99%;
 }
 

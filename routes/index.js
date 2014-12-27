@@ -7,8 +7,6 @@ var new_topic_module = require('../own_modules/new_topic_module.js').init('./dat
 var user_module = require('../own_modules/user_module.js').init('./data/adda.db');
 var res_module = require('../own_modules/res_module.js').init('./data/adda.db');
 var lib = require('../own_modules/adda_module.js').lib;
-// var server =router.get_server();
-// console.log(server);
 var bc = require("bcryptjs");
 
 router.get('/', function(req, res) {
@@ -75,6 +73,7 @@ var formatComments =function(comments){
 }
 
 router.post('/newComment/:id',requireLogin, function(req, res) {
+	console.log("content",req.body.content);
 	var newComment = {
 		content:req.body.content,
 		email:req.session.user,

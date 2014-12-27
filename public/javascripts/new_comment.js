@@ -25,12 +25,11 @@ var onPageLoad =function(){
 	 	comment += list(data.comment);
 	 	$("#allComments").html(comment); 		
 	});
-
 	$("#btn_comment").click(function(){
 		var id = getId();
 		var content =$("#cmt_box").val();
 		$("#cmt_box").val('');
-		$.ajax({url:"/newComment/"+id,type:"POST",data:"content="+content});
+		$.ajax({url:"/newComment/"+id,type:"POST", dataType: "json",data:{content:content}});
 	});
 	
 	$("#btn_loadComplete").click(loadComments)
