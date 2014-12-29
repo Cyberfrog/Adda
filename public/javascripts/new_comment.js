@@ -10,7 +10,7 @@ var getLists = function(comments){
 	return comments.map(list).join("\r\n");
 }
 var list =function(comment){
-		return '<li><div>'+comment.name+": "+comment.content+"<br>"+comment.time+"</div></li>";
+		return '<li><div><b>'+comment.name+":</b> "+comment.content+"<br>"+comment.time+"</div></li><br>";
 }
 var getId = function(){
 	var location = window.location.href.split('/');
