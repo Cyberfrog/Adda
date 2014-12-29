@@ -2,16 +2,14 @@ block vars
  -var title = 'Topics'
 
 extends base
+block login
+ a(href="/dashboard" class="logout") Dashboard 
 block content
- a(href="/logout") Logout
- hr
  link(rel="stylesheet" type="text/css" href="stylesheets/topics.css")
- center
-  h1 Add new Topic
  body
-  div(class= 'div_style' )
-   div(align="center")
+   div(class="addTopic") 
     form(action="/topics" method="post")
+     h1 Add new Topic
      |Name : 
      input(type="text" name="name" required)
      br
@@ -23,15 +21,17 @@ block content
      input(type="submit" value="submit")
      br
      br
-   div(align="center")
+   hr
+   div(class="addTopic")
     form(action="/topics" method="get")
      h3 Search Topics-
      input(type="text" name="searchby" required)
      input(type="submit" value="search")
     if topics
      each topic in topics
-      a(href="/topic/#{topic.id}") #{topic.name}
-      br
+      h4
+       a(href="/topic/#{topic.id}") #{topic.name}
+       br
 
 
 

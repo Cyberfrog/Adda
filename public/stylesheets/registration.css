@@ -29,3 +29,9 @@ h1{
 	color: grey;
 	width: 100%;
 }
+.home{
+	float: right;
+	padding-right: 2%;
+	font-size: 150%;
+	margin-top: -3%;
+}

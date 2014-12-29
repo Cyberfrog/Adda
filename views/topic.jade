@@ -1,16 +1,17 @@
 extends base
 block vars
  -var title = "TOPIC"
- -var allowComment = true
+ -var allowComment = true 
 block scripts
+ link(rel="stylesheet" type="text/css" href="/stylesheets/topic.css")
  script(type ="text/javascript" src ="/javascripts/jquery-1.11.1.min.js")
  script(type ="text/javascript" src ="/javascripts/new_comment.js")
  script(type ="text/javascript" src ="/javascripts/socket.io.js")
- link(rel="stylesheet" type="text/css" href="/stylesheets/topic.css")
+block login
+ a(href="/dashboard" class="logout") Dashboard
 block content
- a(href="/logout") Logout
  br
- br
+ p
  |Name : #{name}
  |Started by : #{admin}
  |Start Time : #{start_time}
@@ -30,7 +31,8 @@ block content
    else
     -allowComment =false
     button(onclick="window.location.href='/join/#{id}'") Join
-
+ hr
+ br
  div Comments 
   button(id="btn_loadComplete") Load Complete
   ul(id="allComments")
