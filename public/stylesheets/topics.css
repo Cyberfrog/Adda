@@ -1,9 +1,17 @@
-.div_style{
-	display: inline-block;
-	text-align: center;
-	border:2px ;
-	border-style: solid;
-	margin-left: 35%;
-	padding: 5%;
-	background-color: #e8d5c1;
-};
+
+.logout{
+	float: right;
+	padding-right: 2%;
+	font-size: 150%;
+	margin-top: -3%;
+}
+
+h4{
+	color: #000000;
+	font-size: 14px;
+	text-decoration: underline;
+	margin-left: 25%;
+}
+.addTopic{
+	padding-left: 10%;
+}

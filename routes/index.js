@@ -135,23 +135,24 @@ router.get('/dashboard',requireLogin, function(req, res) {
 });
 
 router.get("/login",function(req,res){
+	if(req.session.user){
+		res.redirect('/dashboard');
+		return;
+	}
 	res.render("login");
 })
 
 router.post("/login",function(req,res){
 	var user = req.body;
 	new_topic_module.get_password_by_email(user.email,function(err,existing_user){
-		if(!existing_user){
-			res.render('login',{error:'Invalid username and password.'});
-			return;
+		if(existing_user){
+			if(bc.compareSync(user.password,existing_user.password)){ 
+				req.session.user = user.email;
+  				res.redirect('/dashboard');
+  				return;
+			}		
 		}
-		if(bc.compareSync(user.password,existing_user.password)){ 
-			req.session.user = user.email;
-  			res.redirect('/dashboard');
-		}
-		else{
-  		res.render('login',{error:'please write your right email and password'});
-  		}
+		res.render('login',{error:'Invalid username or password.'});
 	})
 });
 

@@ -3,19 +3,16 @@ block vars
  -var title = "dashbord"
 block scripts
  link(rel="stylesheet" type="text/css" href="stylesheets/dashboard.css")
-block content
- a(href="/logout") Logout
- hr
+block login
+ a(href="/logout" class="logout") Logout
+block content 
  div(class= 'dashboard')
-  p Name: #{name}
+  h3 WELCOME ............: #{name}
   h3 My Topics:
-  div
-   ol
+  div(class="data")
+   ul
     if topics
      each topic in topics
-      li
-       a(href="/topic/#{topic.id}") #{topic.name}
-    br
-    br
-    a(href="/topics") Topics
-
+      a(href="/topic/#{topic.id}") 
+       li #{topic.name}
+   button(onclick="window.location.href = '/topics'") Topics

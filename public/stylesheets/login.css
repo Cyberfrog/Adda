@@ -34,3 +34,10 @@ td {
 	width: 260px;
 	border: 1px red medium;
 }
+
+.home{
+	float: right;
+	padding-right: 2%;
+	font-size: 150%;
+	margin-top: -3%;
+}

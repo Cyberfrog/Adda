@@ -1,9 +1,28 @@
-.dashboard{
-	display: inline-block;
+.logout{
+	float: right;
+	padding-right: 2%;
+	padding-top: 10%;
+	font-size: 150%;
+}
+
+li{
+	color: #000000;
+	font-size: 20px;
+	text-decoration: underline;
+}
+h3{
+	color: grey;
+	font-size: 30px;
+	width: 100%;
 	text-align: center;
-	border:2px ;
-	border-style: solid;
-	margin-left: 40%;
-	padding: 5%;
-	background-color: #e8d5c1;
-};
+}
+.data{
+	font-size: 20px;
+	color: grey;
+	padding-left: 25%;
+	margin-top: -2%;
+}
+p{
+	color: #000000;
+	font-size: 20px;
+}
